@@ -12,9 +12,18 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 Info
 ```{r}
+rm(list=ls())
 setwd("~/GitHub/DDS-Analytics")
-library("readxl")
-library("dygraphs")
+library(readxl)
+library(dygraphs)
+library(tidyr)
+library(ggplot2)
+library(forecast)
+library(xtable)
+library(readr)
+library(reshape2)
+#library(wordcloud2)
+sessionInfo()
 CaseStudy2_data <- read_excel("Input/CaseStudy2-data.xlsx")
 View(CaseStudy2_data)
 # install.packages("tidyr")
@@ -27,12 +36,15 @@ View(CaseStudy2_data)
 # install.packages("xtable")
 # install.packages("XML")
 # install.packages("httr")
-install.packages("dygraphs")
-
-
-install.packages("forecast")
-library("forecast")
-
+# install.packages("dygraphs")
+# install.packages("forecast")
+```
+Preliminary data analysis
+Data Structure Analysis, Quality Analysis etc.
+```{r}
+str(CaseStudy2_data)
+unique(CaseStudy2_data$Gender)
+unique(CaseStudy2_data$Over18)
 ```
 determine factors that lead to attrition
 identify (at least) the top three factors that contribute to turnover
