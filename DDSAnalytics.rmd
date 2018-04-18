@@ -12,6 +12,11 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 Info
 ```{r}
+setwd("~/GitHub/DDS-Analytics")
+library("readxl")
+library("dygraphs")
+CaseStudy2_data <- read_excel("Input/CaseStudy2-data.xlsx")
+View(CaseStudy2_data)
 # install.packages("tidyr")
 # install.packages("stringr")
 # install.packages("ggvis")
@@ -22,4 +27,54 @@ Info
 # install.packages("xtable")
 # install.packages("XML")
 # install.packages("httr")
+install.packages("dygraphs")
+
+
+install.packages("forecast")
+library("forecast")
+
+```
+determine factors that lead to attrition
+identify (at least) the top three factors that contribute to turnover
+The business is also interested in learning about any job role specific trends that may exist in the data set (e.g., “Data Scientists have the highest job satisfaction”
+
+•	Title
+•	Authors all listed
+•	Presentation Outline
+•	Business Objectives
+•	Data Sourced
+•	Methodology
+•	Evaluation/Results
+•	Summary
+•	Business Objectives
+•	Data Source	
+•	Where you got it 
+•	Basic Statistics 
+•	Methodology	
+•	Steps 
+•	Workflow
+•	Evaluation/Results
+•	Tell me the percentages
+•	Show me graphs with explanations
+•	The top three factors that contribute to turnover
+•	Tell me about any job role specific trends that may exist in the data set
+•	Provide any other interesting trends and observations from your analysis
+•	Other things to consider?
+•	Summary 
+•	Insights
+•	Recommendations
+•	Improvements
+•	Questions
+
+Have your presentation as a PDF ready to present on April 24. 
+
+```{r}
+# a	Read the csv into R and take a look at the data set.  Output how many rows and columns the data.frame is.
+
+
+# b	The column names are either too much or not enough.  Change the column names so that they do not have spaces, underscores, slashes, and the like. All column names should be under 12 characters. Make sure you’re updating your codebook with information on the tidied data set as well.
+# c	Some columns are, due to Qualtrics, malfunctioning.  
+# d	Make sure your columns are the proper data types (i.e., numeric, character, etc.).  If they are incorrect, convert them. 
+
+
 ```

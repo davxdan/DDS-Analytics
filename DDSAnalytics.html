@@ -127,7 +127,12 @@ $(document).ready(function () {
 
 
 <p>Info</p>
-<pre class="r"><code># install.packages(&quot;tidyr&quot;)
+<pre class="r"><code>setwd(&quot;~/GitHub/DDS-Analytics&quot;)
+library(readxl)</code></pre>
+<pre><code>## Warning: package 'readxl' was built under R version 3.4.4</code></pre>
+<pre class="r"><code>CaseStudy2_data &lt;- read_excel(&quot;Input/CaseStudy2-data.xlsx&quot;)
+View(CaseStudy2_data)
+# install.packages(&quot;tidyr&quot;)
 # install.packages(&quot;stringr&quot;)
 # install.packages(&quot;ggvis&quot;)
 # install.packages(&quot;rgl&quot;)

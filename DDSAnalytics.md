@@ -11,6 +11,17 @@ output:
 Info
 
 ```r
+setwd("~/GitHub/DDS-Analytics")
+library(readxl)
+```
+
+```
+## Warning: package 'readxl' was built under R version 3.4.4
+```
+
+```r
+CaseStudy2_data <- read_excel("Input/CaseStudy2-data.xlsx")
+View(CaseStudy2_data)
 # install.packages("tidyr")
 # install.packages("stringr")
 # install.packages("ggvis")
