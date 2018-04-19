@@ -48,8 +48,7 @@ unique(CaseStudy2_data$Attrition)
 ```
 a	Remove all observations where the participant is under age 18.  No further analysis of underage individuals is permitted by your client.  Remove any other age outliers as you see fit, but be sure to tell what you’re doing and why.
 ```{r}
-unique(CaseStudy2_data$Age)
-unique(CaseStudy2_data$Over18)
+min(CaseStudy2_data$Age)
 ```
 b	Please provide (in pretty-fied table format or similar), descriptive statistics on at least 7 variables (age, Income, etc.).  Create a simple histogram for two of them.  Comment on the shape of the distribution in your markdown.
 ```{r}
@@ -60,24 +59,42 @@ dr <- matrix(summary(CaseStudy2_data$DailyRate))
 cw<-matrix(summary(CaseStudy2_data$NumCompaniesWorked))
 yac<-matrix(summary(CaseStudy2_data$YearsAtCompany))
 ywm<-matrix(summary(CaseStudy2_data$YearsWithCurrManager))
-x<-data.frame(cbind(dr,cw,yac,ywm))
-colnames(x)<-c("DailyRate","Number of Companies Worked","Years at Company","Years with Manager")
+dfh<-matrix(summary(CaseStudy2_data$DistanceFromHome))
+psh<-matrix(summary(CaseStudy2_data$PercentSalaryHike))
+ycr<-matrix(summary(CaseStudy2_data$YearsInCurrentRole))
+x<-data.frame(cbind(dr,cw,yac,ywm,dfh,psh,ycr))
+colnames(x)<-c("DailyRate","Number of Companies Worked","Years at Company","Years with Manager", "Distance From Home","Percent Salary Hike","Years in Current Role")
 rownames(x)<-c("Min.","1st Qu.","Median","Mean","3rd Qu.","Max.")
 kable(x, "html") %>%
   kable_styling(bootstrap_options = "striped", full_width = F)
 
+palette <- c("#999999", "#E69F00", "#009E73", "#0072B2", "#D55E00", "#CC79A7")
+ggplot(CaseStudy2_data, aes(x=DailyRate))+
+  geom_histogram(binwidth=50,  position="identity",color="white", fill="lightblue")
 
+# ggplot(diamonds, aes(price, fill = cut)) +
+#   geom_histogram(binwidth = 500)
+ggplot(CaseStudy2_data, aes(x=NumCompaniesWorked))+
+  geom_histogram( binwidth=1,  position="identity",color="white", fill="lightblue")
 
 # Variables to avoid:Age, Gender, marital status, relationship statisfaction, total working years(Use caution)
 ```
-
-
-
 c	Give the frequencies (in table format or similar) for Gender, Education, and Occupation.  They can be separate tables, if that’s your choice.
+
 d	Give the counts (again, pretty table) of management positions.
 
+```{r}
+ggplot(CaseStudy2_data, aes(x=Gender)) +geom_bar(stat = "count")
+
+ggplot(CaseStudy2_data, aes(Education, colour = EducationField)) +
+  geom_freqpoly(show.legend = TRUE,   inherit.aes = TRUE)
+
+# ggplot(CaseStudy2_data, aes(x=JobRole, colour = Gender)) +
+#   geom_freqpoly(stat = "count", show.legend = TRUE,   inherit.aes = TRUE)
 
 
+
+```
 
 
 

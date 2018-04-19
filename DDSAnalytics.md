@@ -17,6 +17,27 @@ library(knitr)
 library(readxl)
 library(dygraphs)
 library(tidyr)
+library(dplyr)
+```
+
+```
+## 
+## Attaching package: 'dplyr'
+```
+
+```
+## The following objects are masked from 'package:stats':
+## 
+##     filter, lag
+```
+
+```
+## The following objects are masked from 'package:base':
+## 
+##     intersect, setdiff, setequal, union
+```
+
+```r
 library(ggplot2)
 library(forecast)
 library(xtable)
@@ -149,15 +170,20 @@ unique(CaseStudy2_data$Over18)
 b	Please provide (in pretty-fied table format or similar), descriptive statistics on at least 7 variables (age, Income, etc.).  Create a simple histogram for two of them.  Comment on the shape of the distribution in your markdown.
 
 ```r
-# Interesting variables
-# daily rate, education,  job satisfaction,number of companies worked, performance rating,years at company, years with current manager
-x <- summary(CaseStudy2_data$DailyRate)
-DailyRateSummary<-data.frame(x=matrix(x),row.names=names(x))
-names(DailyRateSummary)<-paste("", "Value")
+# Interesting variables: daily rate, education,  job satisfaction,number of companies worked, performance rating,years at company, years with current manager
 
-# x<-summary(CaseStudy2_data$NumCompaniesWorked)
-
-kable(DailyRateSummary, "html") %>%
+#age<-matrix(summary(CaseStudy2_data$Age))
+dr <- matrix(summary(CaseStudy2_data$DailyRate))
+cw<-matrix(summary(CaseStudy2_data$NumCompaniesWorked))
+yac<-matrix(summary(CaseStudy2_data$YearsAtCompany))
+ywm<-matrix(summary(CaseStudy2_data$YearsWithCurrManager))
+dfh<-matrix(summary(CaseStudy2_data$DistanceFromHome))
+psh<-matrix(summary(CaseStudy2_data$PercentSalaryHike))
+ycr<-matrix(summary(CaseStudy2_data$YearsInCurrentRole))
+x<-data.frame(cbind(dr,cw,yac,ywm,dfh,psh,ycr))
+colnames(x)<-c("DailyRate","Number of Companies Worked","Years at Company","Years with Manager", "Distance From Home","Percent Salary Hike","Years in Current Role")
+rownames(x)<-c("Min.","1st Qu.","Median","Mean","3rd Qu.","Max.")
+kable(x, "html") %>%
   kable_styling(bootstrap_options = "striped", full_width = F)
 ```
 
@@ -165,41 +191,98 @@ kable(DailyRateSummary, "html") %>%
  <thead>
   <tr>
    <th style="text-align:left;">   </th>
-   <th style="text-align:right;">  Value </th>
+   <th style="text-align:right;"> DailyRate </th>
+   <th style="text-align:right;"> Number of Companies Worked </th>
+   <th style="text-align:right;"> Years at Company </th>
+   <th style="text-align:right;"> Years with Manager </th>
+   <th style="text-align:right;"> Distance From Home </th>
+   <th style="text-align:right;"> Percent Salary Hike </th>
+   <th style="text-align:right;"> Years in Current Role </th>
   </tr>
  </thead>
 <tbody>
   <tr>
    <td style="text-align:left;"> Min. </td>
    <td style="text-align:right;"> 102.0000 </td>
+   <td style="text-align:right;"> 0.000000 </td>
+   <td style="text-align:right;"> 0.000000 </td>
+   <td style="text-align:right;"> 0.000000 </td>
+   <td style="text-align:right;"> 1.000000 </td>
+   <td style="text-align:right;"> 11.00000 </td>
+   <td style="text-align:right;"> 0.000000 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 1st Qu. </td>
    <td style="text-align:right;"> 465.0000 </td>
+   <td style="text-align:right;"> 1.000000 </td>
+   <td style="text-align:right;"> 3.000000 </td>
+   <td style="text-align:right;"> 2.000000 </td>
+   <td style="text-align:right;"> 2.000000 </td>
+   <td style="text-align:right;"> 12.00000 </td>
+   <td style="text-align:right;"> 2.000000 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Median </td>
    <td style="text-align:right;"> 802.0000 </td>
+   <td style="text-align:right;"> 2.000000 </td>
+   <td style="text-align:right;"> 5.000000 </td>
+   <td style="text-align:right;"> 3.000000 </td>
+   <td style="text-align:right;"> 7.000000 </td>
+   <td style="text-align:right;"> 14.00000 </td>
+   <td style="text-align:right;"> 3.000000 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Mean </td>
    <td style="text-align:right;"> 802.4857 </td>
+   <td style="text-align:right;"> 2.693197 </td>
+   <td style="text-align:right;"> 7.008163 </td>
+   <td style="text-align:right;"> 4.123129 </td>
+   <td style="text-align:right;"> 9.192517 </td>
+   <td style="text-align:right;"> 15.20952 </td>
+   <td style="text-align:right;"> 4.229252 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 3rd Qu. </td>
    <td style="text-align:right;"> 1157.0000 </td>
+   <td style="text-align:right;"> 4.000000 </td>
+   <td style="text-align:right;"> 9.000000 </td>
+   <td style="text-align:right;"> 7.000000 </td>
+   <td style="text-align:right;"> 14.000000 </td>
+   <td style="text-align:right;"> 18.00000 </td>
+   <td style="text-align:right;"> 7.000000 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Max. </td>
    <td style="text-align:right;"> 1499.0000 </td>
+   <td style="text-align:right;"> 9.000000 </td>
+   <td style="text-align:right;"> 40.000000 </td>
+   <td style="text-align:right;"> 17.000000 </td>
+   <td style="text-align:right;"> 29.000000 </td>
+   <td style="text-align:right;"> 25.00000 </td>
+   <td style="text-align:right;"> 18.000000 </td>
   </tr>
 </tbody>
 </table>
 
 ```r
-#total working years(Use caution)
-# Variables to avoid
-# Age, Gender, marital status, relationship statisfaction, total working years(Use caution)
+palette <- c("#999999", "#E69F00", "#009E73", "#0072B2", "#D55E00", "#CC79A7")
+ggplot(CaseStudy2_data, aes(x=DailyRate))+
+  geom_histogram(binwidth=100, color="lightblue", fill="lightblue")
+```
+
+![](DDSAnalytics_files/figure-html/unnamed-chunk-5-1.png)<!-- -->
+
+```r
+# ggplot(diamonds, aes(price, fill = cut)) +
+#   geom_histogram(binwidth = 500)
+ggplot(CaseStudy2_data, aes(x=NumCompaniesWorked))+
+  geom_histogram( binwidth=.5,  position="identity",color="lightblue", fill="lightblue")
+```
+
+![](DDSAnalytics_files/figure-html/unnamed-chunk-5-2.png)<!-- -->
+
+```r
+# Variables to avoid:Age, Gender, marital status, relationship statisfaction, total working years(Use caution)
 ```
 
 

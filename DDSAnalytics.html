@@ -133,7 +133,16 @@ library(knitr)
 library(readxl)
 library(dygraphs)
 library(tidyr)
-library(ggplot2)
+library(dplyr)</code></pre>
+<pre><code>## 
+## Attaching package: 'dplyr'</code></pre>
+<pre><code>## The following objects are masked from 'package:stats':
+## 
+##     filter, lag</code></pre>
+<pre><code>## The following objects are masked from 'package:base':
+## 
+##     intersect, setdiff, setequal, union</code></pre>
+<pre class="r"><code>library(ggplot2)
 library(forecast)
 library(xtable)
 library(kableExtra)
@@ -203,15 +212,20 @@ View(CaseStudy2_data)</code></pre>
 <pre class="r"><code>unique(CaseStudy2_data$Over18)</code></pre>
 <pre><code>## [1] &quot;Y&quot;</code></pre>
 <p>b Please provide (in pretty-fied table format or similar), descriptive statistics on at least 7 variables (age, Income, etc.). Create a simple histogram for two of them. Comment on the shape of the distribution in your markdown.</p>
-<pre class="r"><code># Interesting variables
-# daily rate, education,  job satisfaction,number of companies worked, performance rating,years at company, years with current manager
-x &lt;- summary(CaseStudy2_data$DailyRate)
-DailyRateSummary&lt;-data.frame(x=matrix(x),row.names=names(x))
-names(DailyRateSummary)&lt;-paste(&quot;&quot;, &quot;Value&quot;)
+<pre class="r"><code># Interesting variables: daily rate, education,  job satisfaction,number of companies worked, performance rating,years at company, years with current manager
 
-# x&lt;-summary(CaseStudy2_data$NumCompaniesWorked)
-
-kable(DailyRateSummary, &quot;html&quot;) %&gt;%
+#age&lt;-matrix(summary(CaseStudy2_data$Age))
+dr &lt;- matrix(summary(CaseStudy2_data$DailyRate))
+cw&lt;-matrix(summary(CaseStudy2_data$NumCompaniesWorked))
+yac&lt;-matrix(summary(CaseStudy2_data$YearsAtCompany))
+ywm&lt;-matrix(summary(CaseStudy2_data$YearsWithCurrManager))
+dfh&lt;-matrix(summary(CaseStudy2_data$DistanceFromHome))
+psh&lt;-matrix(summary(CaseStudy2_data$PercentSalaryHike))
+ycr&lt;-matrix(summary(CaseStudy2_data$YearsInCurrentRole))
+x&lt;-data.frame(cbind(dr,cw,yac,ywm,dfh,psh,ycr))
+colnames(x)&lt;-c(&quot;DailyRate&quot;,&quot;Number of Companies Worked&quot;,&quot;Years at Company&quot;,&quot;Years with Manager&quot;, &quot;Distance From Home&quot;,&quot;Percent Salary Hike&quot;,&quot;Years in Current Role&quot;)
+rownames(x)&lt;-c(&quot;Min.&quot;,&quot;1st Qu.&quot;,&quot;Median&quot;,&quot;Mean&quot;,&quot;3rd Qu.&quot;,&quot;Max.&quot;)
+kable(x, &quot;html&quot;) %&gt;%
   kable_styling(bootstrap_options = &quot;striped&quot;, full_width = F)</code></pre>
 <table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
@@ -219,7 +233,25 @@ kable(DailyRateSummary, &quot;html&quot;) %&gt;%
 <th style="text-align:left;">
 </th>
 <th style="text-align:right;">
-Value
+DailyRate
+</th>
+<th style="text-align:right;">
+Number of Companies Worked
+</th>
+<th style="text-align:right;">
+Years at Company
+</th>
+<th style="text-align:right;">
+Years with Manager
+</th>
+<th style="text-align:right;">
+Distance From Home
+</th>
+<th style="text-align:right;">
+Percent Salary Hike
+</th>
+<th style="text-align:right;">
+Years in Current Role
 </th>
 </tr>
 </thead>
@@ -231,6 +263,24 @@ Min.
 <td style="text-align:right;">
 102.0000
 </td>
+<td style="text-align:right;">
+0.000000
+</td>
+<td style="text-align:right;">
+0.000000
+</td>
+<td style="text-align:right;">
+0.000000
+</td>
+<td style="text-align:right;">
+1.000000
+</td>
+<td style="text-align:right;">
+11.00000
+</td>
+<td style="text-align:right;">
+0.000000
+</td>
 </tr>
 <tr>
 <td style="text-align:left;">
@@ -238,6 +288,24 @@ Min.
 </td>
 <td style="text-align:right;">
 465.0000
+</td>
+<td style="text-align:right;">
+1.000000
+</td>
+<td style="text-align:right;">
+3.000000
+</td>
+<td style="text-align:right;">
+2.000000
+</td>
+<td style="text-align:right;">
+2.000000
+</td>
+<td style="text-align:right;">
+12.00000
+</td>
+<td style="text-align:right;">
+2.000000
 </td>
 </tr>
 <tr>
@@ -247,6 +315,24 @@ Median
 <td style="text-align:right;">
 802.0000
 </td>
+<td style="text-align:right;">
+2.000000
+</td>
+<td style="text-align:right;">
+5.000000
+</td>
+<td style="text-align:right;">
+3.000000
+</td>
+<td style="text-align:right;">
+7.000000
+</td>
+<td style="text-align:right;">
+14.00000
+</td>
+<td style="text-align:right;">
+3.000000
+</td>
 </tr>
 <tr>
 <td style="text-align:left;">
@@ -254,6 +340,24 @@ Mean
 </td>
 <td style="text-align:right;">
 802.4857
+</td>
+<td style="text-align:right;">
+2.693197
+</td>
+<td style="text-align:right;">
+7.008163
+</td>
+<td style="text-align:right;">
+4.123129
+</td>
+<td style="text-align:right;">
+9.192517
+</td>
+<td style="text-align:right;">
+15.20952
+</td>
+<td style="text-align:right;">
+4.229252
 </td>
 </tr>
 <tr>
@@ -263,6 +367,24 @@ Mean
 <td style="text-align:right;">
 1157.0000
 </td>
+<td style="text-align:right;">
+4.000000
+</td>
+<td style="text-align:right;">
+9.000000
+</td>
+<td style="text-align:right;">
+7.000000
+</td>
+<td style="text-align:right;">
+14.000000
+</td>
+<td style="text-align:right;">
+18.00000
+</td>
+<td style="text-align:right;">
+7.000000
+</td>
 </tr>
 <tr>
 <td style="text-align:left;">
@@ -271,12 +393,37 @@ Max.
 <td style="text-align:right;">
 1499.0000
 </td>
+<td style="text-align:right;">
+9.000000
+</td>
+<td style="text-align:right;">
+40.000000
+</td>
+<td style="text-align:right;">
+17.000000
+</td>
+<td style="text-align:right;">
+29.000000
+</td>
+<td style="text-align:right;">
+25.00000
+</td>
+<td style="text-align:right;">
+18.000000
+</td>
 </tr>
 </tbody>
 </table>
-<pre class="r"><code>#total working years(Use caution)
-# Variables to avoid
-# Age, Gender, marital status, relationship statisfaction, total working years(Use caution)</code></pre>
+<pre class="r"><code>palette &lt;- c(&quot;#999999&quot;, &quot;#E69F00&quot;, &quot;#009E73&quot;, &quot;#0072B2&quot;, &quot;#D55E00&quot;, &quot;#CC79A7&quot;)
+ggplot(CaseStudy2_data, aes(x=DailyRate))+
+  geom_histogram(binwidth=100, color=&quot;lightblue&quot;, fill=&quot;lightblue&quot;)</code></pre>
+<p><img src="data:image/png;base64,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nQ3T8VV2qU/3Mh/e6wNNHz5Y8y1kziHQk25eZ3aVnwWa4wyKchZn0PWX+Nmp8+0MSqD4mEWgs0z//HXp7+PfijJ5DIoq7AJNH758X/r7bXGJn/TO3Z7FN31kIMEy0B9ebBpfJgcD99dBmz4ykGAY6LcfzqDrECjKWQQ6e5L06euaIgkUlVgEWgGBohyBQppNoMW3fewSKLyZBHqXP39/PnIolEBRziLQMN/V2fSRgQQChTSLQLnEIxiTQHmShFBsAnVGoChHoJBmEujLxa7j9x4TKMqZBPptO3X87ngCRTmLQHmZCcEQKKRZBMrroAjGJND0gddBEYZNoM4IFOUIFNIIFNIIFNIIFNIIFNIIFNIIFNIIFNIIFNIIFNIIFNIIFNIIFNIIFNIIFNIIFPEjUEgjUEgjUEgjUEgjUEgjUEgjUEgjUEgjUEgjUEizC7RE05tGPBxy4gyK5nCJhzQChTQChTQChTQChTQChTQChTQChTQChTQChTQChTQChTQChTQChTQChTQChTQChTQChTQChTQChTQChTQChTQChTQChTQChTQChTQChTQChTQChTQChTQChTQChTQChTQChTQChTQChTQChTQChTQChTQChTQChTQChTQChTQChTQChbQwgT4mycEgTceXSWdIoAgoSKCj00F6f5hOet38DYEinDBn0Gmk4+tB0SqBIphggWanztHZMB1f9bO/7GVKPrbpTSMeDum5BDo62e+nj515oDnOoAgg2Bk0K/PtDEqgCCRYoOltl8egCC5IoLNr+6R3zrN4hBXmDHqfJNljUF4HRXBhAl2HQBEAgUIagUIagUIagUIagUIagUIagUIagUIagUIagUIagUIagUIagUIagUIagUIagUIagUIagUIagUIagUIagUIagUIagUIagUIagUIagUIagUIagUIagUIagUIagUIagUIagUIagUIagUIagUIagUIagUIagUIagUIagUIagUIagUKaXaAlmt404uGQE2dQNIdLPKQRKKQRKKQRKKQRKKQRKKQRKKQRKKQRKKQRKKQRKKQRKKQRKKQRKKQRKKQRKKQRKKQRKKQRKKQRKKQRKKQRKKQRKKQRKKQRKKQRKKQRKKQRKKQRKKQRKKQRKKQRKKQRKKQRKKQRKKQRKKQRKKQRKKQRKKQRKKQRKKQRKKQRKKQRKKQRKKQFDXR8mXSGBIqAQgY66XXT+0MCRUAhAx1fD9LR6YBAEU7IQEdnw3R81c/+tJcp+cCmN414OHTnHOhjZx5oruQMGo7l2gxe99oVF68c6NsZlECbXLstg1cO1PkxaDhCh0tn7bYMXjnQSe/c7Vl8OEKHS2fttgxeOVDn10HDETpcOmu3ZfDqgS7Z8LNWI3S4dNZuy+AEGunabRmcQCNduy2DE2ika7dlcAKNdO22DE6gka7dlsEJNNK12zI4gUa6dlsGJ9BI127L4AQa6dptGZxAI127LYMTaKRrt2VwAo107bYM7hnoq7Jv/pDG4HXbbHACjU3LBifQ2LRscAKNTcsG9w0UMEWgkEagkEagkEagkOYV6NJ3IkfhPkmSg8F88HjmL35kxvLUcQxfDO5z1H0CXf6JjFG47ea/zwaPZ/7H/Ou7PHUcwxeDex11n0CXfxpODCa/Fz9cajZ4NPPf7v+Rjbk8dRTDTwf3Ouo+gS7/PLEYZFeXJOnOB49o/vwrujx1JMPng3sddZ9Al38iYwxGv/bzf8+zwSOaP/86L08dyfDFvyyfo96uM2jhthvXSSgX9Rm0sOlRb9dj0MJtN6aHcVOjOB+DLgVa/2PQ5Z/IGIP88jL5+2A2eETz51/R5akjGX7+2GTjo96+10H3+5G9lJiL/nXQjY86/yUJ0ggU0ggU0ggU0ggU0ggU0ggU0ggU0gg0jJeLrdz2wrue/vQ1+7V8+9buwgf89581DhgrAg3j5WK3+P3L98X3LgZapPm0c7zmRryPQMOYBfh8dLz43pVA02/ba27E+wg0jHmAd9v5abK4lk8v8UWRd9uLgU5vz3/fLS79n28aHFwdgYYxD/Dhy/fiLHr3+WYa6EOW38vF8ez2h63jdOH27JYs2LvlxwVYRKBhvAb6+eZ/eW7TOrNfeY5Pv9zMnyRlbS7cnn/4yuMCLCLQMBbOoPl5cmvr0yzQ/KKf/Spuf9qZfdD89vRu9bk9lhBoGAuPMZ+PPn19O4Nmp89/XRzPbs+v8Iu3c3X/EIGGsfAsfnoSfT2Dvlz85Zeb+e3fskv6wu35m2bnlkegYSy8DppH97TzGmh2Gd9eeB10+/X2PObXO+AdBBrG7EnQ9DSZPcL829HxPNDixfnXl6GyD5ndnr3dLu5HnyUI1Fz2HL7pESJGoObueI7ugUCNPe3wRN0HgUIagUIagUIagUIagUIagUIagULa/wGCWNeCPzU2QgAAAABJRU5ErkJggg==" /><!-- --></p>
+<pre class="r"><code># ggplot(diamonds, aes(price, fill = cut)) +
+#   geom_histogram(binwidth = 500)
+ggplot(CaseStudy2_data, aes(x=NumCompaniesWorked))+
+  geom_histogram( binwidth=.5,  position=&quot;identity&quot;,color=&quot;lightblue&quot;, fill=&quot;lightblue&quot;)</code></pre>
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAqAAAAHgCAMAAABNUi8GAAAAz1BMVEUAAAAAACsAAFUAK4AAVaorAAArACsrAFUrKysrK4ArgNQzMzNNTU1NTWtNTYhNa6ZNiMRVAABVACtVVVVVgIBVqqpVqv9rTU1rTWtrTYhra4hra6ZrpuGAKwCAKyuAgCuAgFWAqoCA1KqA1P+ITU2ITWuITYiIa02IxP+ma02ma2uma4imxKam4eGm4f+qVQCq1ICq//+t2ObEiE3E///UgCvU/9TU///hpmvh///r6+v/qlX/xIj/1ID/1NT/4ab//6r//8T//9T//+H///9lWRsZAAAACXBIWXMAAA7DAAAOwwHHb6hkAAARnklEQVR4nO2dDXvayBVGSdbZtI4Sx2nrbBrSphsnxbut3dS4i2u7gNH//03VSEIYAsOAmLlv8HmfNoqBe+6MOIw+UtNOTohwOtYDIMQXBCXSQVAiHQQl0kFQIh0EJdLZUtD/BmeDlwICNCtEUEDKIAQFJA1CUEDSIAQFJA1CUEDSIAQFJA1CUEDSIAQFJA1CUEDSIAQFJA1CUEDSIAQFJA1CUEDSIAQFJA1CUEDSIAQFJA1CUEDSIAQFJA2SFPTf3mw8xx2MCJAVCEEBSYMQFJA0CEEBSYMQFJA0CEEBSYMQFJA0CEEBSYMQFJA0CEEBSYMQFJA0CEEBSYMQFJA0KETQQZZlr/r5+DQ7us6nGwQFlAIUIuhlz/05Oevlg9fTDYICSgIKEHTyy7nbjL/08+G7fr1BUEBJQAGCFsf0LOvlw/fX+fjzeb0pHn9RxLPutohf0Dg9iXY8gg5/Oner6O1RaWa9qZ+L8xFiBQXUFK4XtMxl75sVFEEBxQeFC8o5KCADUICg7qA++bU/OetWV/FdruIBJQOFrKCDLHt5nnMfFJABKPQQvyJxRoiggJpCBAWkDEJQQNIgBAUkDUJQQNIgBAUkDUJQQNIgBAUkDUJQQNIgBAUkDUJQQNIgBAUkDUJQQNIgBAUkDUJQQNIgBAUkDUJQQNIgBAUkDUJQQNIgBAUkDUJQQNIgBAUkDUJQQNIgBAUkDUJQQNIgBAUkDUJQQNIgBAUkDUJQQNIgBAUkDUJQQNKgloLGiV9Q69ERi7CCApIEISggaRCCApIGISggaRCCApIGISggaRCCApIGISggaRCCApIGISggaRCCApIGISggaRCCApIGISggaRCCApIGISggaRCCApIGISggaRCCApIGISggaRCCApIGISggaRCCApIGISggaRCCApIGISggaRCCApIGISggaRCCApIGISggaRCCApIGISggaRCCApIGhQk6Oevl+fg0O7puNggKKAUoTNBB1islHbyebhAUUBJQkKDDP/+9l4+/9PPhu369QVBASUAhgk5++WexbA7fX+fjz+f1pnj4RRHvurt1/ILG6Um04xN00HXH9duj0sx6Uz8V5yPECgqoKVwvaLFmTpatoAgKKD4oQNBB5tLlHBSQASjkEF/dZpqcdaur+C5X8YCSgcIF5T4oIANQmKArE2eECAqoKURQQMogBAUkDUJQQNIgBAUkDUJQQNIgBAUkDUJQQNIgBAUkDUJQQNIgBAUkDUJQQNIgBAUkDUJQQNIgBAUkDUJQQNIgBAUkDUJQQNIgBAUkDUJQQNIgBAUkDUJQQNIgBAUkDUJQQNIgBAUkDUJQQNIgBAUkDUJQQNIgBAUkDUJQQNIgBAUkDWopaJz4BbUeHbEIKyggSRCCApIGISggaRCCApIGISggaRCCApIGISggaRCCApIGISggaRCCApIGISggaRCCApIGISggaRCCApIGISggaRCCApIGISggaRCCApIGISggaRCCApIGISggaRCCApIGISggaRCCApIGISggaRCCApIGISggaRCCApIGISggaRCCApIGISggaRCCApIGISggaRCCApIGhQh6m2Wv+nk+Ps2OrpsNggJKAQoQdPiunw9e55Oz3oMNggJKAgpZQStJx1/6DzYICigJKFDQYs0cvr/Ox5/P603x2Isi/qpt4xc0Tk+iHa+gw7cvz/Pbo9LMelM/E+cjxAoKqCkMETR/sHTOVlAEBRQfFChoftnjHBSQAShA0PqgPjnrVlfxXa7iASUDhayggywrzkG5DwrIABR6iF+ROCNEUEBNIYICUgYhKCBpEIICkgYhKCBp0DJBR8cnbnPz9CuCAjIGISggadC3gl51pjlY6yeCAooM8qygIYkzQgQF1BQuEXSDxBkhggJqCpcJevesPMRzDgrIHLRM0PsPB6yggDRAywTlHBSQDGj5CoqggERAywQNugOKoIBSgJYJOjrucJEESAO0dAUNT5wRIiigphBBASmDlgnKIR6QDGj1Cjp684kVFJA1aLWg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" /><!-- --></p>
+<pre class="r"><code># Variables to avoid:Age, Gender, marital status, relationship statisfaction, total working years(Use caution)</code></pre>
 <p>c Give the frequencies (in table format or similar) for Gender, Education, and Occupation. They can be separate tables, if that’s your choice. d Give the counts (again, pretty table) of management positions.</p>
 <p>c Give the frequencies (in table format or similar) for Gender, Education, and Occupation. They can be separate tables, if that’s your choice. d Give the counts (again, pretty table) of management positions.</p>
 <p>a Note: You should make all of these appealing looking. Remember to include things like a clean, informative title, axis labels that are in plain English, and readable axis values that do not overlap. b Create barcharts in ggplot or similar The bars should be in descending order, Use any color palette of your choice other than the default. c Is there a relationship between Age and Income? Create a scatterplot and make an assessment of whether there is a relationship. Color each point based on the Gender of the participant. You’re welcome to use lm() or similar functions to back up your claims.</p>
