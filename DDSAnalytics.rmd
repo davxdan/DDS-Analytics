@@ -23,7 +23,7 @@ library(xtable)
 library(readr)
 library(reshape2)
 #library(wordcloud2)
-sessionInfo()
+#sessionInfo()
 CaseStudy2_data <- read_excel("Input/CaseStudy2-data.xlsx")
 View(CaseStudy2_data)
 # install.packages("tidyr")
@@ -77,16 +77,8 @@ The business is also interested in learning about any job role specific trends t
 •	Recommendations
 •	Improvements
 •	Questions
-
 Have your presentation as a PDF ready to present on April 24. 
-
-```{r}
-# a	Read the csv into R and take a look at the data set.  Output how many rows and columns the data.frame is.
-
-
-# b	The column names are either too much or not enough.  Change the column names so that they do not have spaces, underscores, slashes, and the like. All column names should be under 12 characters. Make sure you’re updating your codebook with information on the tidied data set as well.
-# c	Some columns are, due to Qualtrics, malfunctioning.  
-# d	Make sure your columns are the proper data types (i.e., numeric, character, etc.).  If they are incorrect, convert them. 
-
-
-```
+a	Read the csv into R and take a look at the data set.  Output how many rows and columns the data.frame is.
+b	The column names are either too much or not enough.  Change the column names so that they do not have spaces, underscores, slashes, and the like. All column names should be under 12 characters. Make sure you’re updating your codebook with information on the tidied data set as well.
+c	Some columns are, due to Qualtrics, malfunctioning.  
+d	Make sure your columns are the proper data types (i.e., numeric, character, etc.).  If they are incorrect, convert them.
