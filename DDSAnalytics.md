@@ -152,20 +152,11 @@ unique(CaseStudy2_data$Attrition)
 a	Remove all observations where the participant is under age 18.  No further analysis of underage individuals is permitted by your client.  Remove any other age outliers as you see fit, but be sure to tell what you’re doing and why.
 
 ```r
-unique(CaseStudy2_data$Age)
+min(CaseStudy2_data$Age)
 ```
 
 ```
-##  [1] 41 49 37 33 27 32 59 30 38 36 35 29 31 34 28 22 53 24 21 42 44 46 39
-## [24] 43 50 26 48 55 45 56 23 51 40 54 58 20 25 19 57 52 47 18 60
-```
-
-```r
-unique(CaseStudy2_data$Over18)
-```
-
-```
-## [1] "Y"
+## [1] 18
 ```
 b	Please provide (in pretty-fied table format or similar), descriptive statistics on at least 7 variables (age, Income, etc.).  Create a simple histogram for two of them.  Comment on the shape of the distribution in your markdown.
 
@@ -267,7 +258,7 @@ kable(x, "html") %>%
 ```r
 palette <- c("#999999", "#E69F00", "#009E73", "#0072B2", "#D55E00", "#CC79A7")
 ggplot(CaseStudy2_data, aes(x=DailyRate))+
-  geom_histogram(binwidth=100, color="lightblue", fill="lightblue")
+  geom_histogram(binwidth=50,  position="identity",color="white", fill="lightblue")
 ```
 
 ![](DDSAnalytics_files/figure-html/unnamed-chunk-5-1.png)<!-- -->
@@ -276,7 +267,7 @@ ggplot(CaseStudy2_data, aes(x=DailyRate))+
 # ggplot(diamonds, aes(price, fill = cut)) +
 #   geom_histogram(binwidth = 500)
 ggplot(CaseStudy2_data, aes(x=NumCompaniesWorked))+
-  geom_histogram( binwidth=.5,  position="identity",color="lightblue", fill="lightblue")
+  geom_histogram( binwidth=1,  position="identity",color="white", fill="lightblue")
 ```
 
 ![](DDSAnalytics_files/figure-html/unnamed-chunk-5-2.png)<!-- -->
@@ -284,14 +275,32 @@ ggplot(CaseStudy2_data, aes(x=NumCompaniesWorked))+
 ```r
 # Variables to avoid:Age, Gender, marital status, relationship statisfaction, total working years(Use caution)
 ```
-
-
-
 c	Give the frequencies (in table format or similar) for Gender, Education, and Occupation.  They can be separate tables, if that’s your choice.
+
 d	Give the counts (again, pretty table) of management positions.
 
 
+```r
+ggplot(CaseStudy2_data, aes(x=Gender)) +geom_bar(stat = "count")
+```
 
+![](DDSAnalytics_files/figure-html/unnamed-chunk-6-1.png)<!-- -->
+
+```r
+ggplot(CaseStudy2_data, aes(Education, colour = EducationField)) +
+  geom_freqpoly(show.legend = TRUE,   inherit.aes = TRUE)
+```
+
+```
+## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+```
+
+![](DDSAnalytics_files/figure-html/unnamed-chunk-6-2.png)<!-- -->
+
+```r
+# ggplot(CaseStudy2_data, aes(x=JobRole, colour = Gender)) +
+#   geom_freqpoly(stat = "count", show.legend = TRUE,   inherit.aes = TRUE)
+```
 
 
 
