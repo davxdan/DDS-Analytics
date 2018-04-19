@@ -18,6 +18,7 @@ library(knitr)
 library(readxl)
 library(dygraphs)
 library(tidyr)
+library(dplyr)
 library(ggplot2)
 library(forecast)
 library(xtable)
@@ -52,24 +53,22 @@ unique(CaseStudy2_data$Over18)
 ```
 b	Please provide (in pretty-fied table format or similar), descriptive statistics on at least 7 variables (age, Income, etc.).  Create a simple histogram for two of them.  Comment on the shape of the distribution in your markdown.
 ```{r}
-# Interesting variables
-# daily rate, education,  job satisfaction,number of companies worked, performance rating,years at company, years with current manager
+# Interesting variables: daily rate, education,  job satisfaction,number of companies worked, performance rating,years at company, years with current manager
 
-
-dt <- mtcars[1:5, 1:6]
-
-kable(dt, "html") %>%
+#age<-matrix(summary(CaseStudy2_data$Age))
+dr <- matrix(summary(CaseStudy2_data$DailyRate))
+cw<-matrix(summary(CaseStudy2_data$NumCompaniesWorked))
+yac<-matrix(summary(CaseStudy2_data$YearsAtCompany))
+ywm<-matrix(summary(CaseStudy2_data$YearsWithCurrManager))
+x<-data.frame(cbind(dr,cw,yac,ywm))
+colnames(x)<-c("DailyRate","Number of Companies Worked","Years at Company","Years with Manager")
+rownames(x)<-c("Min.","1st Qu.","Median","Mean","3rd Qu.","Max.")
+kable(x, "html") %>%
   kable_styling(bootstrap_options = "striped", full_width = F)
 
 
-#total working years(Use caution)
 
-# Variables to avoid
-Age, Gender, marital status, relationship statisfaction, total working years(Use caution)
-
-
-
-
+# Variables to avoid:Age, Gender, marital status, relationship statisfaction, total working years(Use caution)
 ```
 
 

@@ -129,12 +129,14 @@ $(document).ready(function () {
 <p>Info</p>
 <pre class="r"><code>rm(list=ls())
 setwd(&quot;~/GitHub/DDS-Analytics&quot;)
+library(knitr)
 library(readxl)
 library(dygraphs)
 library(tidyr)
 library(ggplot2)
 library(forecast)
 library(xtable)
+library(kableExtra)
 library(readr)
 library(reshape2)</code></pre>
 <pre><code>## 
@@ -142,23 +144,12 @@ library(reshape2)</code></pre>
 <pre><code>## The following object is masked from 'package:tidyr':
 ## 
 ##     smiths</code></pre>
-<pre class="r"><code>#library(wordcloud2)
-#sessionInfo()
-CaseStudy2_data &lt;- read_excel(&quot;Input/CaseStudy2-data.xlsx&quot;)
-View(CaseStudy2_data)
-# install.packages(&quot;tidyr&quot;)
-# install.packages(&quot;stringr&quot;)
-# install.packages(&quot;ggvis&quot;)
-# install.packages(&quot;rgl&quot;)
-# install.packages(&quot;vcd&quot;)
-# install.packages(&quot;shiny&quot;)
-# install.packages(&quot;rmarkdown&quot;)
-# install.packages(&quot;xtable&quot;)
-# install.packages(&quot;XML&quot;)
-# install.packages(&quot;httr&quot;)
-# install.packages(&quot;dygraphs&quot;)
-# install.packages(&quot;forecast&quot;)</code></pre>
-<p>Preliminary data analysis Data Structure Analysis, Quality Analysis etc. Clean the Raw Data “a Read the csv into R and take a look at the data set. Output how many rows and columns the data.frame is.”</p>
+<pre class="r"><code>library(wordcloud2)
+#sessionInfo()</code></pre>
+<p>Import the data</p>
+<pre class="r"><code>CaseStudy2_data &lt;- read_excel(&quot;Input/CaseStudy2-data.xlsx&quot;)
+View(CaseStudy2_data)</code></pre>
+<p>Preliminary data analysis Data Structure Analysis, Quality Analysis etc. Clean the Raw Data “a Read the csv into R and take a look at the data set. Output how many rows and columns the data.frame is.” b The column names are either too much or not enough. Change the column names so that they do not have spaces, underscores, slashes, and the like. All column names should be under 12 characters. Make sure you’re updating your codebook with information on the tidied data set as well.</p>
 <pre class="r"><code>class((CaseStudy2_data))</code></pre>
 <pre><code>## [1] &quot;tbl_df&quot;     &quot;tbl&quot;        &quot;data.frame&quot;</code></pre>
 <pre class="r"><code>str(CaseStudy2_data)</code></pre>
@@ -200,19 +191,100 @@ View(CaseStudy2_data)
 ##  $ YearsWithCurrManager    : num  5 7 0 0 2 6 0 0 8 7 ...</code></pre>
 <pre class="r"><code>unique(CaseStudy2_data$Gender)</code></pre>
 <pre><code>## [1] &quot;Female&quot; &quot;Male&quot;</code></pre>
-<pre class="r"><code>unique(CaseStudy2_data$Age)</code></pre>
-<pre><code>##  [1] 41 49 37 33 27 32 59 30 38 36 35 29 31 34 28 22 53 24 21 42 44 46 39
-## [24] 43 50 26 48 55 45 56 23 51 40 54 58 20 25 19 57 52 47 18 60</code></pre>
-<pre class="r"><code>unique(CaseStudy2_data$Over18)</code></pre>
-<pre><code>## [1] &quot;Y&quot;</code></pre>
 <pre class="r"><code>unique(CaseStudy2_data$YearsAtCompany)</code></pre>
 <pre><code>##  [1]  6 10  0  8  2  7  1  9  5  4 25  3 12 14 22 15 27 21 17 11 13 37 16
 ## [24] 20 40 24 33 19 36 18 29 31 32 34 26 30 23</code></pre>
 <pre class="r"><code>unique(CaseStudy2_data$Attrition)</code></pre>
 <pre><code>## [1] &quot;Yes&quot; &quot;No&quot;</code></pre>
+<p>a Remove all observations where the participant is under age 18. No further analysis of underage individuals is permitted by your client. Remove any other age outliers as you see fit, but be sure to tell what you’re doing and why.</p>
+<pre class="r"><code>unique(CaseStudy2_data$Age)</code></pre>
+<pre><code>##  [1] 41 49 37 33 27 32 59 30 38 36 35 29 31 34 28 22 53 24 21 42 44 46 39
+## [24] 43 50 26 48 55 45 56 23 51 40 54 58 20 25 19 57 52 47 18 60</code></pre>
+<pre class="r"><code>unique(CaseStudy2_data$Over18)</code></pre>
+<pre><code>## [1] &quot;Y&quot;</code></pre>
+<p>b Please provide (in pretty-fied table format or similar), descriptive statistics on at least 7 variables (age, Income, etc.). Create a simple histogram for two of them. Comment on the shape of the distribution in your markdown.</p>
+<pre class="r"><code># Interesting variables
+# daily rate, education,  job satisfaction,number of companies worked, performance rating,years at company, years with current manager
+x &lt;- summary(CaseStudy2_data$DailyRate)
+DailyRateSummary&lt;-data.frame(x=matrix(x),row.names=names(x))
+names(DailyRateSummary)&lt;-paste(&quot;&quot;, &quot;Value&quot;)
+
+# x&lt;-summary(CaseStudy2_data$NumCompaniesWorked)
+
+kable(DailyRateSummary, &quot;html&quot;) %&gt;%
+  kable_styling(bootstrap_options = &quot;striped&quot;, full_width = F)</code></pre>
+<table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+Value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Min.
+</td>
+<td style="text-align:right;">
+102.0000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1st Qu.
+</td>
+<td style="text-align:right;">
+465.0000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Median
+</td>
+<td style="text-align:right;">
+802.0000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Mean
+</td>
+<td style="text-align:right;">
+802.4857
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+3rd Qu.
+</td>
+<td style="text-align:right;">
+1157.0000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Max.
+</td>
+<td style="text-align:right;">
+1499.0000
+</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>#total working years(Use caution)
+# Variables to avoid
+# Age, Gender, marital status, relationship statisfaction, total working years(Use caution)</code></pre>
+<p>c Give the frequencies (in table format or similar) for Gender, Education, and Occupation. They can be separate tables, if that’s your choice. d Give the counts (again, pretty table) of management positions.</p>
+<p>c Give the frequencies (in table format or similar) for Gender, Education, and Occupation. They can be separate tables, if that’s your choice. d Give the counts (again, pretty table) of management positions.</p>
+<p>a Note: You should make all of these appealing looking. Remember to include things like a clean, informative title, axis labels that are in plain English, and readable axis values that do not overlap. b Create barcharts in ggplot or similar The bars should be in descending order, Use any color palette of your choice other than the default. c Is there a relationship between Age and Income? Create a scatterplot and make an assessment of whether there is a relationship. Color each point based on the Gender of the participant. You’re welcome to use lm() or similar functions to back up your claims.</p>
+<p>d What about Life Satisfaction? Create another scatterplot. Is there a discernible relationship there to what?</p>
 <p>The executive leadership has identified predicting employee turnover as its first application of data science for talent management. Before the business green lights the project, they have tasked your data science team to conduct an analysis of existing employee data.</p>
 <p>determine factors that lead to attrition identify (at least) the top three factors that contribute to turnover The business is also interested in learning about any job role specific trends that may exist in the data set (e.g., “Data Scientists have the highest job satisfaction”</p>
-<p>• Title • Authors all listed • Presentation Outline • Business Objectives • Data Sourced • Methodology • Evaluation/Results • Summary • Business Objectives • Data Source • Where you got it • Basic Statistics • Methodology • Steps • Workflow • Evaluation/Results • Tell me the percentages • Show me graphs with explanations • The top three factors that contribute to turnover • Tell me about any job role specific trends that may exist in the data set • Provide any other interesting trends and observations from your analysis • Other things to consider? • Summary • Insights • Recommendations • Improvements • Questions Have your presentation as a PDF ready to present on April 24. a Read the csv into R and take a look at the data set. Output how many rows and columns the data.frame is. b The column names are either too much or not enough. Change the column names so that they do not have spaces, underscores, slashes, and the like. All column names should be under 12 characters. Make sure you’re updating your codebook with information on the tidied data set as well. c Some columns are, due to Qualtrics, malfunctioning.<br />
+<p>• Title • Authors all listed • Presentation Outline • Business Objectives • Data Sourced • Methodology • Evaluation/Results • Summary • Business Objectives • Data Source • Where you got it • Basic Statistics • Methodology • Steps • Workflow • Evaluation/Results • Tell me the percentages • Show me graphs with explanations • The top three factors that contribute to turnover • Tell me about any job role specific trends that may exist in the data set • Provide any other interesting trends and observations from your analysis • Other things to consider? • Summary • Insights • Recommendations • Improvements • Questions Have your presentation as a PDF ready to present on April 24.</p>
+<p>c Some columns are, due to Qualtrics, malfunctioning.<br />
 d Make sure your columns are the proper data types (i.e., numeric, character, etc.). If they are incorrect, convert them.</p>
 
 
