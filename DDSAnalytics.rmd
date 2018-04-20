@@ -28,27 +28,27 @@ library(reshape2)
 library(wordcloud2)
 #sessionInfo()
 ```
-Import the data
+Oservations and Variables in the data that was provided:
 ```{r}
 CaseStudy2_data <- read_excel("Input/CaseStudy2-data.xlsx")
-View(CaseStudy2_data)
+dims<-as.data.frame(dim(CaseStudy2_data))
+  cbind.data.frame("Observations",dims)
+rownames(dims)<-c("Observations","Variables")
+colnames(dims)<-c("Count")
+               kable(dims, "html") %>%
+  kable_styling(bootstrap_options = "striped", full_width = F)
 ```
-Preliminary data analysis
-Data Structure Analysis, Quality Analysis etc.
-Clean the Raw Data
-"a	Read the csv into R and take a look at the data set.  Output how many rows and columns the data.frame is."
-b	The column names are either too much or not enough.  Change the column names so that they do not have spaces, underscores, slashes, and the like. All column names should be under 12 characters. Make sure you’re updating your codebook with information on the tidied data set as well.
-
+Preliminary data analysis; Data Structure, Quality Analysis etc.
+b.	The column names are either too much or not enough.  Change the column names so that they do not have spaces, underscores, slashes, and the like. All column names should be under 12 characters. Make sure you’re updating your codebook with information on the tidied data set as well.
 ```{r}
 class((CaseStudy2_data))
-str(CaseStudy2_data)
 unique(CaseStudy2_data$Gender)
 unique(CaseStudy2_data$YearsAtCompany)
 unique(CaseStudy2_data$Attrition)
 ```
 a	Remove all observations where the participant is under age 18.  No further analysis of underage individuals is permitted by your client.  Remove any other age outliers as you see fit, but be sure to tell what you’re doing and why.
 ```{r}
-min(CaseStudy2_data$Age)
+underage<-min(CaseStudy2_data$Age)
 ```
 b	Please provide (in pretty-fied table format or similar), descriptive statistics on at least 7 variables (age, Income, etc.).  Create a simple histogram for two of them.  Comment on the shape of the distribution in your markdown.
 ```{r}
