@@ -32,11 +32,11 @@ Oservations and Variables in the data that was provided:
 ```{r}
 CaseStudy2_data <- read_excel("Input/CaseStudy2-data.xlsx")
 dims<-as.data.frame(dim(CaseStudy2_data))
-  cbind.data.frame("Observations",dims)
+cbind.data.frame("Observations",dims)
 rownames(dims)<-c("Observations","Variables")
 colnames(dims)<-c("Count")
-               kable(dims, "html") %>%
-  kable_styling(bootstrap_options = "striped", full_width = F)
+kable(dims, "html") %>%
+kable_styling(bootstrap_options = "striped", full_width = F)
 ```
 Preliminary data analysis; Data Structure, Quality Analysis etc.
 b.	The column names are either too much or not enough.  Change the column names so that they do not have spaces, underscores, slashes, and the like. All column names should be under 12 characters. Make sure you’re updating your codebook with information on the tidied data set as well.
@@ -48,11 +48,16 @@ unique(CaseStudy2_data$Attrition)
 ```
 a	Remove all observations where the participant is under age 18.  No further analysis of underage individuals is permitted by your client.  Remove any other age outliers as you see fit, but be sure to tell what you’re doing and why.
 ```{r}
-underage<-min(CaseStudy2_data$Age)
+#verify no records with participants under age 18
+underage<-as.matrix(min(CaseStudy2_data$Age))
+colnames(underage)<-c("Youngest Age of Participants")
+kable(underage, "html") %>%
+kable_styling(bootstrap_options = "striped", full_width = F)
 ```
-b	Please provide (in pretty-fied table format or similar), descriptive statistics on at least 7 variables (age, Income, etc.).  Create a simple histogram for two of them.  Comment on the shape of the distribution in your markdown.
+b	Please provide (in pretty-fied table format or similar), descriptive statistics on at least 7 variables (age, Income, etc.). 
 ```{r}
 # Interesting variables: daily rate, education,  job satisfaction,number of companies worked, performance rating,years at company, years with current manager
+# Variables to avoid:Age, Gender, marital status, relationship statisfaction, total working years
 
 #age<-matrix(summary(CaseStudy2_data$Age))
 dr <- matrix(summary(CaseStudy2_data$DailyRate))
@@ -62,40 +67,40 @@ ywm<-matrix(summary(CaseStudy2_data$YearsWithCurrManager))
 dfh<-matrix(summary(CaseStudy2_data$DistanceFromHome))
 psh<-matrix(summary(CaseStudy2_data$PercentSalaryHike))
 ycr<-matrix(summary(CaseStudy2_data$YearsInCurrentRole))
+
 x<-data.frame(cbind(dr,cw,yac,ywm,dfh,psh,ycr))
 colnames(x)<-c("DailyRate","Number of Companies Worked","Years at Company","Years with Manager", "Distance From Home","Percent Salary Hike","Years in Current Role")
 rownames(x)<-c("Min.","1st Qu.","Median","Mean","3rd Qu.","Max.")
 kable(x, "html") %>%
-  kable_styling(bootstrap_options = "striped", full_width = F)
+kable_styling(bootstrap_options = "striped", full_width = F)
 
+```
+Create a simple histogram for two of them.  Comment on the shape of the distribution in your markdown.
+```{r}
 palette <- c("#999999", "#E69F00", "#009E73", "#0072B2", "#D55E00", "#CC79A7")
 ggplot(CaseStudy2_data, aes(x=DailyRate))+
-  geom_histogram(binwidth=50,  position="identity",color="white", fill="lightblue")
+geom_histogram(binwidth=50,  position="identity",color="white", fill="lightblue")
 
 # ggplot(diamonds, aes(price, fill = cut)) +
 #   geom_histogram(binwidth = 500)
 ggplot(CaseStudy2_data, aes(x=NumCompaniesWorked))+
   geom_histogram( binwidth=1,  position="identity",color="white", fill="lightblue")
-
-# Variables to avoid:Age, Gender, marital status, relationship statisfaction, total working years(Use caution)
 ```
 c	Give the frequencies (in table format or similar) for Gender, Education, and Occupation.  They can be separate tables, if that’s your choice.
-
-d	Give the counts (again, pretty table) of management positions.
-
 ```{r}
-ggplot(CaseStudy2_data, aes(x=Gender)) +geom_bar(stat = "count")
+ggplot(CaseStudy2_data, aes(x=Gender, color = Gender, fill=Gender)) +geom_bar(stat = "count")
 
 ggplot(CaseStudy2_data, aes(Education, colour = EducationField)) +
   geom_freqpoly(show.legend = TRUE,   inherit.aes = TRUE)
-
 # ggplot(CaseStudy2_data, aes(x=JobRole, colour = Gender)) +
 #   geom_freqpoly(stat = "count", show.legend = TRUE,   inherit.aes = TRUE)
 
-
-
+ggplot(CaseStudy2_data) +
+  aes(x = JobRole, fill = factor(Education)) +
+  geom_bar(position = "fill")
+head(CaseStudy2_data)
 ```
-
+d	Give the counts (again, pretty table) of management positions.
 
 
 
