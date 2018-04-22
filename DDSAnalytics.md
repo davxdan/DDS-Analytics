@@ -1,7 +1,7 @@
 ---
 title: "DDS Analkytics"
-author: "Daniel Davieau, LAkeitra Webb, Emil Ramos"
-date: "April 18, 2018"
+author: "Daniel Davieau, Lakeitra Webb, Emil Ramos"
+date: "April 24, 2018"
 output: 
   html_document: 
     keep_md: yes
@@ -37,15 +37,16 @@ Info
 ## 
 ##     smiths
 ```
+## Business Objective
+The leadership has identified predicting employee turnover as its first application of data science for talent management. Before investing in the project they would like an analysis of existing employee data.  
+
+## Data Source
+Data was prvided by the client in form of a .csv file.  
+
+####Basic Statistics
 Oservations and Variables in the data that was provided:
 
-```
-##   "Observations" dim(CaseStudy2_data)
-## 1   Observations                 1470
-## 2   Observations                   35
-```
-
-<table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<table class="table table-striped" style="width: auto !important; ">
  <thead>
   <tr>
    <th style="text-align:left;">   </th>
@@ -83,10 +84,10 @@ b.	The column names are either too much or not enough.  Change the column names 
 ## [1] "Yes" "No"
 ```
 a	Remove all observations where the participant is under age 18.  No further analysis of underage individuals is permitted by your client.  Remove any other age outliers as you see fit, but be sure to tell what you’re doing and why.
-<table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<table class="table table-striped" style="width: auto !important; ">
  <thead>
   <tr>
-   <th style="text-align:right;"> Youngest Age of Participants </th>
+   <th style="text-align:right;"> Youngest Employee </th>
   </tr>
  </thead>
 <tbody>
@@ -173,18 +174,16 @@ b	Please provide (in pretty-fied table format or similar), descriptive statistic
 </tbody>
 </table>
 Create a simple histogram for two of them.  Comment on the shape of the distribution in your markdown.
-![](DDSAnalytics_files/figure-html/unnamed-chunk-6-1.png)<!-- -->![](DDSAnalytics_files/figure-html/unnamed-chunk-6-2.png)<!-- -->
+<img src="DDSAnalytics_files/figure-html/unnamed-chunk-7-1.png" style="display: block; margin: auto;" /><img src="DDSAnalytics_files/figure-html/unnamed-chunk-7-2.png" style="display: block; margin: auto;" />
 c	Give the frequencies (in table format or similar) for Gender, Education, and Occupation.  They can be separate tables, if that’s your choice.
-![](DDSAnalytics_files/figure-html/unnamed-chunk-7-1.png)<!-- -->
+![](DDSAnalytics_files/figure-html/unnamed-chunk-8-1.png)<!-- -->
 
 ```
 ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
 ```
 
-![](DDSAnalytics_files/figure-html/unnamed-chunk-7-2.png)<!-- -->
+![](DDSAnalytics_files/figure-html/unnamed-chunk-8-2.png)<!-- -->
 d	Give the counts (again, pretty table) of management positions.
-
-
 
 c	Give the frequencies (in table format or similar) for Gender, Education, and Occupation.  They can be separate tables, if that’s your choice.
 d	Give the counts (again, pretty table) of management positions.
