@@ -1,6 +1,6 @@
 ---
-title: "DDS Analkytics"
-author: "Daniel Davieau, Lakeitra Webb, Emil Ramos"
+title: "DDS Analytics"
+author: "Authors: Daniel Davieau, Lakeitra Webb, Emil Ramos"
 date: "April 24, 2018"
 output: 
   html_document: 
@@ -11,7 +11,7 @@ output:
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-```{r,include=FALSE}
+```{r Environment Information, include=FALSE}
 rm(list=ls())
 setwd("~/GitHub/DDS-Analytics")
 library(knitr)
@@ -26,33 +26,75 @@ library(kableExtra)
 library(readr)
 library(reshape2)
 library(wordcloud2)
-#sessionInfo()
-palette <- c("#999999", "#E69F00", "#009E73", "#0072B2", "#D55E00", "#CC79A7")
-#Orange "#E69F00"
-#Green  "#009E73"
-#Blue   "#0072B2"
-#DrkOran"#D55E00"
-#Pink   "#CC79A7"
+sessionInfo()
+palette <- c("#999999", "#E69F00", "#009E73", "#0072B2", "#D55E00", "#CC79A7","#AC3E31")
+#Orange="#E69F00",Green="#009E73",Blue="#0072B2",DrkOran="#D55E00",Pink="#CC79A7", red="#AC3E31"
 ```
 ## Business Objective
 The leadership has identified predicting employee turnover as its first application of data science for talent management. Before investing in the project they would like an analysis of existing employee data.  
 
 ## Data
-Data was prvided by the client in form of a .csv file.  
+Data was provided by the client in form of a .csv file "CaseStudy2-data.xlsx".
 
 ####Basic Statistics
-Oservations and Variables in the data that was provided included turned over employees and current employees.
+The data includes a total of 1470 current and terminated employee records with 35 variables. 
 ```{r,include=FALSE}
 CaseStudy2_data <- read_excel("Input/CaseStudy2-data.xlsx")
 dims<-as.data.frame(dim(CaseStudy2_data))
 cbind.data.frame("Observations",dims)
 rownames(dims)<-c("Observations","Variables")
-colnames(dims)<-c("Count")
+colnames(dims)<-c("Data Records")
 ```
 ```{r}
 kable(dims, "html") %>%
 kable_styling(bootstrap_options = "striped", full_width = F,position = "left")
 ```
+Summary of measures included in the data:
+```{r,fig.align='center'}
+# Interesting: daily rate, education,  job satisfaction,number of companies worked, performance rating,years at company, years with current manager
+#Avoid:Age, Gender, marital status, relationship statisfaction, total working years
+dr <- matrix(summary(CaseStudy2_data$DailyRate))
+cw<-matrix(summary(CaseStudy2_data$NumCompaniesWorked))
+yac<-matrix(summary(CaseStudy2_data$YearsAtCompany))
+ywm<-matrix(summary(CaseStudy2_data$YearsWithCurrManager))
+dfh<-matrix(summary(CaseStudy2_data$DistanceFromHome))
+psh<-matrix(summary(CaseStudy2_data$PercentSalaryHike))
+ycr<-matrix(summary(CaseStudy2_data$YearsInCurrentRole))
+x<-data.frame(cbind(dr,cw,yac,ywm,dfh,psh,ycr))
+colnames(x)<-c("DailyRate","Number of Companies Worked","Years at Company","Years with Manager", "Distance From Home","Percent Salary Hike","Years in Current Role")
+rownames(x)<-c("Min.","1st Qu.","Median","Mean","3rd Qu.","Max.")
+kable(x, "html") %>%
+kable_styling(bootstrap_options = "striped", full_width = T)
+```
+##Methodology
+Attrition is the central theme of this analysis. We interpreted the value of "Yes" in attrition as an indicator that the employee has left the company.
+
+We categorized each record as "Current" or "Terminated" and look for patterns in the variables that may explain why emplyees become terminated.  
+
+*__Current__ meaning currently employed by the firm.*  
+*__Terminated__ meaning left the firm (voluntarily or non-voluntarily)*
+
+
+```{r Add Employee Status, include=FALSE}
+#Initialize Employee Status Column
+EmployeeStatus<-as.character("Derp") 
+
+#Add Employee Status to the CaseStudy2_data dataframe.
+cbind(CaseStudy2_data, EmployeeStatus)
+
+#If attrition is "Yes" then set the employee status to "Terminated"
+CaseStudy2_data$EmployeeStatus[CaseStudy2_data$Attrition == "Yes"] <- "Terminated"
+
+#If attrition is "No" then set the employee status to "Current"
+CaseStudy2_data$EmployeeStatus[CaseStudy2_data$Attrition == "No"] <- "Current" 
+```
+```{r,fig.align='center'}
+ggplot(CaseStudy2_data, aes(x=EmployeeStatus,  fill=EmployeeStatus))+
+labs(title="Employees", x = "", y="Count", fill="Status") +geom_bar(stat = "count") +
+  scale_fill_manual(values=c("#E69F00","#AC3E31"))
+  
+```
+
 Preliminary data analysis; Data Structure, Quality Analysis etc.
 b.	The column names are either too much or not enough.  Change the column names so that they do not have spaces, underscores, slashes, and the like. All column names should be under 12 characters. Make sure you’re updating your codebook with information on the tidied data set as well.
 ```{r,include=FALSE}
@@ -69,32 +111,12 @@ colnames(underage)<-c("Youngest Employee")
 kable(underage, "html") %>%
 kable_styling(bootstrap_options = "striped", full_width = F,position = "left")
 ```
-b	Please provide (in pretty-fied table format or similar), descriptive statistics on at least 7 variables (age, Income, etc.). 
-```{r,fig.align='center'}
-# Interesting variables: daily rate, education,  job satisfaction,number of companies worked, performance rating,years at company, years with current manager
-# Variables to avoid:Age, Gender, marital status, relationship statisfaction, total working years
-
-#age<-matrix(summary(CaseStudy2_data$Age))
-dr <- matrix(summary(CaseStudy2_data$DailyRate))
-cw<-matrix(summary(CaseStudy2_data$NumCompaniesWorked))
-yac<-matrix(summary(CaseStudy2_data$YearsAtCompany))
-ywm<-matrix(summary(CaseStudy2_data$YearsWithCurrManager))
-dfh<-matrix(summary(CaseStudy2_data$DistanceFromHome))
-psh<-matrix(summary(CaseStudy2_data$PercentSalaryHike))
-ycr<-matrix(summary(CaseStudy2_data$YearsInCurrentRole))
-
-x<-data.frame(cbind(dr,cw,yac,ywm,dfh,psh,ycr))
-colnames(x)<-c("DailyRate","Number of Companies Worked","Years at Company","Years with Manager", "Distance From Home","Percent Salary Hike","Years in Current Role")
-rownames(x)<-c("Min.","1st Qu.","Median","Mean","3rd Qu.","Max.")
-kable(x, "html") %>%
-kable_styling(bootstrap_options = "striped", full_width = T)
-```
 Create a simple histogram for two of them.  Comment on the shape of the distribution in your markdown.
 ```{r,fig.align='center'}
 ggplot(CaseStudy2_data, aes(x=DailyRate, fill = factor(Attrition)))+
 geom_histogram(binwidth=50, color="white") +
   scale_fill_manual(values = c("#009E73","#0072B2"))
-
+#if there is time categorize dailyrate
 ggplot(CaseStudy2_data, aes(x=NumCompaniesWorked,fill = factor(Attrition)))+
   geom_histogram( binwidth=1,  position="identity",color="white") +
   scale_fill_manual(values = c("#009E73","#0072B2"))

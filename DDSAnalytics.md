@@ -1,6 +1,6 @@
 ---
-title: "DDS Analkytics"
-author: "Daniel Davieau, Lakeitra Webb, Emil Ramos"
+title: "DDS Analytics"
+author: "Authors: Daniel Davieau, Lakeitra Webb, Emil Ramos"
 date: "April 24, 2018"
 output: 
   html_document: 
@@ -14,16 +14,16 @@ output:
 The leadership has identified predicting employee turnover as its first application of data science for talent management. Before investing in the project they would like an analysis of existing employee data.  
 
 ## Data
-Data was prvided by the client in form of a .csv file.  
+Data was provided by the client in form of a .csv file "CaseStudy2-data.xlsx".
 
 ####Basic Statistics
-Oservations and Variables in the data that was provided included turned over employees and current employees.
+The data includes a total of 1470 current and terminated employee records with 35 variables. 
 
 <table class="table table-striped" style="width: auto !important; ">
  <thead>
   <tr>
    <th style="text-align:left;">   </th>
-   <th style="text-align:right;"> Count </th>
+   <th style="text-align:right;"> Data Records </th>
   </tr>
  </thead>
 <tbody>
@@ -37,23 +37,7 @@ Oservations and Variables in the data that was provided included turned over emp
   </tr>
 </tbody>
 </table>
-Preliminary data analysis; Data Structure, Quality Analysis etc.
-b.	The column names are either too much or not enough.  Change the column names so that they do not have spaces, underscores, slashes, and the like. All column names should be under 12 characters. Make sure you’re updating your codebook with information on the tidied data set as well.
-
-a	Remove all observations where the participant is under age 18.  No further analysis of underage individuals is permitted by your client.  Remove any other age outliers as you see fit, but be sure to tell what you’re doing and why.
-<table class="table table-striped" style="width: auto !important; ">
- <thead>
-  <tr>
-   <th style="text-align:right;"> Youngest Employee </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:right;"> 18 </td>
-  </tr>
-</tbody>
-</table>
-b	Please provide (in pretty-fied table format or similar), descriptive statistics on at least 7 variables (age, Income, etc.). 
+Summary of measures included in the data:
 <table class="table table-striped" style="margin-left: auto; margin-right: auto;">
  <thead>
   <tr>
@@ -127,6 +111,34 @@ b	Please provide (in pretty-fied table format or similar), descriptive statistic
    <td style="text-align:right;"> 29.000000 </td>
    <td style="text-align:right;"> 25.00000 </td>
    <td style="text-align:right;"> 18.000000 </td>
+  </tr>
+</tbody>
+</table>
+##Methodology
+Attrition is the central theme of this analysis. We interpreted the value of "Yes" in attrition as an indicator that the employee has left the company.
+
+We categorized each record as "Current" or "Terminated" and look for patterns in the variables that may explain why emplyees become terminated.  
+
+*__Current__ meaning currently employed by the firm.*  
+*__Terminated__ meaning left the firm (voluntarily or non-voluntarily)*
+
+
+
+<img src="DDSAnalytics_files/figure-html/unnamed-chunk-4-1.png" style="display: block; margin: auto;" />
+
+Preliminary data analysis; Data Structure, Quality Analysis etc.
+b.	The column names are either too much or not enough.  Change the column names so that they do not have spaces, underscores, slashes, and the like. All column names should be under 12 characters. Make sure you’re updating your codebook with information on the tidied data set as well.
+
+a	Remove all observations where the participant is under age 18.  No further analysis of underage individuals is permitted by your client.  Remove any other age outliers as you see fit, but be sure to tell what you’re doing and why.
+<table class="table table-striped" style="width: auto !important; ">
+ <thead>
+  <tr>
+   <th style="text-align:right;"> Youngest Employee </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:right;"> 18 </td>
   </tr>
 </tbody>
 </table>
