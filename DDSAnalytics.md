@@ -125,7 +125,7 @@ We categorized each record as "Current" or "Terminated" and look for patterns in
 <img src="DDSAnalytics_files/figure-html/unnamed-chunk-4-1.png" style="display: block; margin: auto;" />
 
 
-a	Remove all observations where the participant is under age 18.  No further analysis of underage individuals is permitted by your client.  Remove any other age outliers as you see fit, but be sure to tell what you’re doing and why.
+As requested employees under the age of 18 have been excluded from this analsyis.
 <table class="table table-striped" style="width: auto !important; ">
  <thead>
   <tr>
@@ -138,58 +138,67 @@ a	Remove all observations where the participant is under age 18.  No further ana
   </tr>
 </tbody>
 </table>
-Create a simple histogram for two of them.  Comment on the shape of the distribution in your markdown.
+We advise caution be used in decision making based on the following variables for ethical or even legal reasons:  
+
+* Age  
+* Gender  
+* Marital Status  
+* Relationship Satisfaction  
+* Total Working Years  
+
+The following graph shows the distribution of employees by daily pay rate.
 <img src="DDSAnalytics_files/figure-html/unnamed-chunk-7-1.png" style="display: block; margin: auto;" /><img src="DDSAnalytics_files/figure-html/unnamed-chunk-7-2.png" style="display: block; margin: auto;" />
 c	Give the frequencies (in table format or similar) for Gender, Education, and Occupation.  They can be separate tables, if that’s your choice.
-![](DDSAnalytics_files/figure-html/unnamed-chunk-8-1.png)<!-- -->
-
-```
-## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
-```
-
-![](DDSAnalytics_files/figure-html/unnamed-chunk-8-2.png)<!-- -->![](DDSAnalytics_files/figure-html/unnamed-chunk-8-3.png)<!-- -->![](DDSAnalytics_files/figure-html/unnamed-chunk-8-4.png)<!-- -->
+![](DDSAnalytics_files/figure-html/unnamed-chunk-8-1.png)<!-- -->![](DDSAnalytics_files/figure-html/unnamed-chunk-8-2.png)<!-- -->
 d	Give the counts (again, pretty table) of management positions.
 
+```
+## [1] "data.frame"
+```
+
+<table class="table table-striped" style="width: auto !important; ">
+ <thead>
+  <tr>
+   <th style="text-align:left;">   </th>
+   <th style="text-align:right;"> Count </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Sales Executives </td>
+   <td style="text-align:right;"> 326 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Manufacturing Directors </td>
+   <td style="text-align:right;"> 145 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Managers </td>
+   <td style="text-align:right;"> 102 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Research Directors </td>
+   <td style="text-align:right;"> 80 </td>
+  </tr>
+</tbody>
+</table>
 c	Is there a relationship between Age and Income?  Create a scatterplot and make an assessment of whether there is a relationship.  Color each point based on the Gender of the participant.  You’re welcome to use lm() or similar functions to back up your claims.
 
 d	What about Life Satisfaction?  Create another scatterplot.  Is there a discernible relationship there to what?   
-
-
-
-The executive leadership has identified predicting employee turnover as its first application of data science for talent management. Before the business green lights the project, they have tasked your data science team to conduct an analysis of existing employee data.
 
 determine factors that lead to attrition
 identify (at least) the top three factors that contribute to turnover
 The business is also interested in learning about any job role specific trends that may exist in the data set (e.g., “Data Scientists have the highest job satisfaction”
 
-•	Title
-•	Authors all listed
-•	Presentation Outline
-•	Business Objectives
-•	Data Sourced
-•	Methodology
-•	Evaluation/Results
-•	Summary
-•	Business Objectives
-•	Data Source	
-•	Where you got it 
-•	Basic Statistics 
-•	Methodology	
-•	Steps 
-•	Workflow
 •	Evaluation/Results
 •	Tell me the percentages
-•	Show me graphs with explanations
 •	The top three factors that contribute to turnover
 •	Tell me about any job role specific trends that may exist in the data set
 •	Provide any other interesting trends and observations from your analysis
 •	Other things to consider?
-•	Summary 
+• Summary
 •	Insights
 •	Recommendations
 •	Improvements
 •	Questions
 Have your presentation as a PDF ready to present on April 24. 
-
-c	Some columns are, due to Qualtrics, malfunctioning.  
-d	Make sure your columns are the proper data types (i.e., numeric, character, etc.).  If they are incorrect, convert them.

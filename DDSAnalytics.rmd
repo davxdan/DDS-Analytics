@@ -36,8 +36,9 @@ library(wordcloud2)
 sessionInfo()
 
 #establish a color palette for consistency
-palette <- c("#999999", "#E69F00", "#009E73", "#0072B2", "#D55E00", "#CC79A7","#AC3E31")
+palette <- c('#073857','#4E91DD','#A13764','#7D9099','#32C3A4','#2F63A0','#484848','#2C707E','#D1A34F','#E34A46','#FCFCFC')
 #Orange="#E69F00",Green="#009E73",Blue="#0072B2",DrkOran="#D55E00",Pink="#CC79A7", red="#AC3E31"
+
 ```
 ## Business Objective
 The leadership has identified predicting employee turnover as its first application of data science for talent management. Before investing in the project they would like an analysis of existing employee data.  
@@ -90,7 +91,7 @@ kable_styling(bootstrap_options = "striped", full_width = F)
 ##Methodology
 Attrition is the central theme of this analysis. We interpreted the value "Yes" in the data provided under attrition as an indicator that the employee has left the company.
 
-We categorized each record as "Current" or "Terminated" and look for patterns in the variables that may explain why emplyees become terminated.  
+We categorized each record as "Current" or "Terminated" and look for patterns in the variables that may explain why employees become terminated.  
 
 *__Current__ meaning currently employed by the firm.*  
 *__Terminated__ meaning left the firm (voluntarily or non-voluntarily)*
@@ -110,7 +111,7 @@ CaseStudy2_data$EmployeeStatus[CaseStudy2_data$Attrition == "No"] <- "Current"
 ```{r,fig.align='center'}
 ggplot(CaseStudy2_data, aes(x=EmployeeStatus,  fill=EmployeeStatus))+
 labs(title="Employees", x = "", y="Count", fill="Status") +geom_bar(stat = "count") +
-  scale_fill_manual(values=c("#E69F00","#AC3E31"))
+  scale_fill_manual(values=c("#2F63A0","#7D9099"))
   
 ```
 
@@ -120,7 +121,7 @@ unique(CaseStudy2_data$Gender)
 unique(CaseStudy2_data$YearsAtCompany)
 unique(CaseStudy2_data$Attrition)
 ```
-a	Remove all observations where the participant is under age 18.  No further analysis of underage individuals is permitted by your client.  Remove any other age outliers as you see fit, but be sure to tell what you’re doing and why.
+As requested employees under the age of 18 have been excluded from this analsyis.
 ```{r}
 #verify no records with participants under age 18
 underage<-as.matrix(min(CaseStudy2_data$Age))
@@ -128,82 +129,96 @@ colnames(underage)<-c("Youngest Employee")
 kable(underage, "html") %>%
 kable_styling(bootstrap_options = "striped", full_width = F,position = "left")
 ```
-Create a simple histogram for two of them.  Comment on the shape of the distribution in your markdown.
-```{r,fig.align='center'}
-ggplot(CaseStudy2_data, aes(x=DailyRate, fill = factor(Attrition)))+
-geom_histogram(binwidth=50, color="white") +
-  scale_fill_manual(values = c("#009E73","#0072B2"))
-#if there is time categorize dailyrate
-ggplot(CaseStudy2_data, aes(x=NumCompaniesWorked,fill = factor(Attrition)))+
-  geom_histogram( binwidth=1,  position="identity",color="white") +
-  scale_fill_manual(values = c("#009E73","#0072B2"))
+We advise caution be used in decision making based on the following variables for ethical or even legal reasons:  
 
+* Age  
+* Gender  
+* Marital Status  
+* Relationship Satisfaction  
+* Total Working Years  
+
+The following graph shows the distribution of employees by daily pay rate.
+```{r,fig.align='center'}
+ggplot(CaseStudy2_data, aes(x=DailyRate,fill = EmployeeStatus))+
+  labs(title="Employees by Daily Pay Rate", x = "", y="Count", fill="Status") +
+geom_histogram(binwidth=50, color="white") +
+  scale_fill_manual(values=c("#2F63A0","#7D9099"))
+#if there is time categorize dailyrate
+ggplot(CaseStudy2_data, aes(x=NumCompaniesWorked,fill = EmployeeStatus))+
+  geom_histogram( binwidth=1,  position="identity",color="white") +
+  scale_fill_manual(values=c("#2F63A0","#7D9099"))
 ```
 c	Give the frequencies (in table format or similar) for Gender, Education, and Occupation.  They can be separate tables, if that’s your choice.
 ```{r}
+#Gender Frequency
 ggplot(CaseStudy2_data, aes(x=Gender,  fill=Gender)) +geom_bar(stat = "count") +
-  scale_fill_manual(values=c("#CC79A7","#0072B2"))
-#Orange "#E69F00"
-#Green  "#009E73"
-#Blue   "#0072B2"
-#DrkOran"#D55E00"
-#Pink   "#CC79A7"
+  scale_fill_manual(values=c("#A13764","#2F63A0"))
 
-ggplot(CaseStudy2_data, aes(Education, colour = EducationField)) +
-geom_freqpoly(show.legend = TRUE,   inherit.aes = TRUE)
+#Education and Occupation
+ggplot(CaseStudy2_data, aes(x=Education,  fill=JobRole)) +geom_bar(stat = "count") +
+  scale_fill_manual(values=palette)
 
-ggplot(CaseStudy2_data) +
-aes(x = JobRole, fill = factor(Attrition)) +
-geom_bar(position = "fill") +
-  coord_flip()
-
-ggplot(CaseStudy2_data) +
-aes(x = JobRole, fill = factor(Attrition)) +
-geom_bar(position = "fill") +
-  coord_flip()
+# ggplot(CaseStudy2_data) +
+# aes(x = JobRole, fill = factor(Attrition)) +
+# geom_bar(position = "fill") +
+#   coord_flip()
+# ggplot(CaseStudy2_data) +
+# aes(x = JobRole, fill = factor(Attrition)) +
+# geom_bar(position = "fill") +
+#   coord_flip()
 ```
 d	Give the counts (again, pretty table) of management positions.
+```{r}
+#Need to come back and make this into a function
+#Get counts of each management category
 
+#Sales Execs
+countsalesExecs<-as.matrix(length(which(CaseStudy2_data$JobRole == "Sales Executive")))
+rownames(countsalesExecs)<-c("Count")
+colnames(countsalesExecs)<-c("Sales Executives")
+
+#Manufacturing Directors
+countManufactureDirectors<-as.matrix(length(which(CaseStudy2_data$JobRole == "Manufacturing Director")))
+rownames(countManufactureDirectors)<-c("Count")
+colnames(countManufactureDirectors)<-c("Manufacturing Directors")
+
+#Managers
+countManagers<-as.matrix(length(which(CaseStudy2_data$JobRole == "Manager")))
+rownames(countManagers)<-c("Count")
+colnames(countManagers)<-c("Managers")
+
+#Research Directors
+countResearchDirectors<-as.matrix(length(which(CaseStudy2_data$JobRole == "Research Director")))
+rownames(countResearchDirectors)<-c("Count")
+colnames(countResearchDirectors)<-c("Research Directors")
+
+#Combine the counts into a dataframe
+Management<-as.data.frame(t(cbind(countsalesExecs,countManufactureDirectors,countManagers,countResearchDirectors)))
+class(Management)
+
+#Display a table
+kable(Management, "html") %>%
+kable_styling(bootstrap_options = "striped", full_width = F,position = "left")
+```
 c	Is there a relationship between Age and Income?  Create a scatterplot and make an assessment of whether there is a relationship.  Color each point based on the Gender of the participant.  You’re welcome to use lm() or similar functions to back up your claims.
+```{r}
+```
 
 d	What about Life Satisfaction?  Create another scatterplot.  Is there a discernible relationship there to what?   
-
-
-
-The executive leadership has identified predicting employee turnover as its first application of data science for talent management. Before the business green lights the project, they have tasked your data science team to conduct an analysis of existing employee data.
 
 determine factors that lead to attrition
 identify (at least) the top three factors that contribute to turnover
 The business is also interested in learning about any job role specific trends that may exist in the data set (e.g., “Data Scientists have the highest job satisfaction”
 
-•	Title
-•	Authors all listed
-•	Presentation Outline
-•	Business Objectives
-•	Data Sourced
-•	Methodology
-•	Evaluation/Results
-•	Summary
-•	Business Objectives
-•	Data Source	
-•	Where you got it 
-•	Basic Statistics 
-•	Methodology	
-•	Steps 
-•	Workflow
 •	Evaluation/Results
 •	Tell me the percentages
-•	Show me graphs with explanations
 •	The top three factors that contribute to turnover
 •	Tell me about any job role specific trends that may exist in the data set
 •	Provide any other interesting trends and observations from your analysis
 •	Other things to consider?
-•	Summary 
+• Summary
 •	Insights
 •	Recommendations
 •	Improvements
 •	Questions
 Have your presentation as a PDF ready to present on April 24. 
-
-c	Some columns are, due to Qualtrics, malfunctioning.  
-d	Make sure your columns are the proper data types (i.e., numeric, character, etc.).  If they are incorrect, convert them.
