@@ -204,7 +204,8 @@ kable_styling(bootstrap_options = "striped", full_width = F,position = "left")
 ```
 
 ```{r}
-#http://www.sthda.com/english/wiki/ggplot2-scatter-plots-quick-start-guide-r-software-and-data-visualization
+#referenced http://www.sthda.com/english/wiki/ggplot2-scatter-plots-quick-start-guide-r-software-and-data-visualization
+
 #Is there a relationship between Age and Income?  Create a scatterplot and make an assessment of whether there is a relationship. Color each dot by gender
 ggplot(CaseStudy2_data, aes(x=Age, y=DailyRate, color=Gender)) +
    geom_point(size=.05)+
