@@ -10,8 +10,8 @@ output:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 ```
-Info
-```{r}
+
+```{r,include=FALSE}
 rm(list=ls())
 setwd("~/GitHub/DDS-Analytics")
 library(knitr)
@@ -41,7 +41,7 @@ The leadership has identified predicting employee turnover as its first applicat
 Data was prvided by the client in form of a .csv file.  
 
 ####Basic Statistics
-Oservations and Variables in the data that was provided:
+Oservations and Variables in the data that was provided included turned over employees and current employees.
 ```{r,include=FALSE}
 CaseStudy2_data <- read_excel("Input/CaseStudy2-data.xlsx")
 dims<-as.data.frame(dim(CaseStudy2_data))
@@ -55,7 +55,7 @@ kable_styling(bootstrap_options = "striped", full_width = F,position = "left")
 ```
 Preliminary data analysis; Data Structure, Quality Analysis etc.
 b.	The column names are either too much or not enough.  Change the column names so that they do not have spaces, underscores, slashes, and the like. All column names should be under 12 characters. Make sure you’re updating your codebook with information on the tidied data set as well.
-```{r}
+```{r,include=FALSE}
 class((CaseStudy2_data))
 unique(CaseStudy2_data$Gender)
 unique(CaseStudy2_data$YearsAtCompany)
@@ -87,15 +87,17 @@ x<-data.frame(cbind(dr,cw,yac,ywm,dfh,psh,ycr))
 colnames(x)<-c("DailyRate","Number of Companies Worked","Years at Company","Years with Manager", "Distance From Home","Percent Salary Hike","Years in Current Role")
 rownames(x)<-c("Min.","1st Qu.","Median","Mean","3rd Qu.","Max.")
 kable(x, "html") %>%
-kable_styling(bootstrap_options = "striped", full_width = F)
+kable_styling(bootstrap_options = "striped", full_width = T)
 ```
 Create a simple histogram for two of them.  Comment on the shape of the distribution in your markdown.
 ```{r,fig.align='center'}
-ggplot(CaseStudy2_data, aes(x=DailyRate, color=palette))+
-geom_histogram(binwidth=50, color="white" , fill="#0072B2")
+ggplot(CaseStudy2_data, aes(x=DailyRate, fill = factor(Attrition)))+
+geom_histogram(binwidth=50, color="white") +
+  scale_fill_manual(values = c("#009E73","#0072B2"))
 
-ggplot(CaseStudy2_data, aes(x=NumCompaniesWorked))+
-  geom_histogram( binwidth=1,  position="identity",color="white", fill="#D55E00")
+ggplot(CaseStudy2_data, aes(x=NumCompaniesWorked,fill = factor(Attrition)))+
+  geom_histogram( binwidth=1,  position="identity",color="white") +
+  scale_fill_manual(values = c("#009E73","#0072B2"))
 
 ```
 c	Give the frequencies (in table format or similar) for Gender, Education, and Occupation.  They can be separate tables, if that’s your choice.
@@ -112,12 +114,12 @@ ggplot(CaseStudy2_data, aes(Education, colour = EducationField)) +
 geom_freqpoly(show.legend = TRUE,   inherit.aes = TRUE)
 
 ggplot(CaseStudy2_data) +
-aes(x = JobRole, fill = factor(Education)) +
+aes(x = JobRole, fill = factor(Attrition)) +
 geom_bar(position = "fill") +
   coord_flip()
 
 ggplot(CaseStudy2_data) +
-aes(x = JobRole, fill = factor(EducationField)) +
+aes(x = JobRole, fill = factor(Attrition)) +
 geom_bar(position = "fill") +
   coord_flip()
 ```

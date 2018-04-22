@@ -8,43 +8,16 @@ output:
 ---
 
 
-Info
 
-```
-## 
-## Attaching package: 'dplyr'
-```
 
-```
-## The following objects are masked from 'package:stats':
-## 
-##     filter, lag
-```
-
-```
-## The following objects are masked from 'package:base':
-## 
-##     intersect, setdiff, setequal, union
-```
-
-```
-## 
-## Attaching package: 'reshape2'
-```
-
-```
-## The following object is masked from 'package:tidyr':
-## 
-##     smiths
-```
 ## Business Objective
 The leadership has identified predicting employee turnover as its first application of data science for talent management. Before investing in the project they would like an analysis of existing employee data.  
 
-## Data Source
+## Data
 Data was prvided by the client in form of a .csv file.  
 
 ####Basic Statistics
-Oservations and Variables in the data that was provided:
+Oservations and Variables in the data that was provided included turned over employees and current employees.
 
 <table class="table table-striped" style="width: auto !important; ">
  <thead>
@@ -67,22 +40,6 @@ Oservations and Variables in the data that was provided:
 Preliminary data analysis; Data Structure, Quality Analysis etc.
 b.	The column names are either too much or not enough.  Change the column names so that they do not have spaces, underscores, slashes, and the like. All column names should be under 12 characters. Make sure you’re updating your codebook with information on the tidied data set as well.
 
-```
-## [1] "tbl_df"     "tbl"        "data.frame"
-```
-
-```
-## [1] "Female" "Male"
-```
-
-```
-##  [1]  6 10  0  8  2  7  1  9  5  4 25  3 12 14 22 15 27 21 17 11 13 37 16
-## [24] 20 40 24 33 19 36 18 29 31 32 34 26 30 23
-```
-
-```
-## [1] "Yes" "No"
-```
 a	Remove all observations where the participant is under age 18.  No further analysis of underage individuals is permitted by your client.  Remove any other age outliers as you see fit, but be sure to tell what you’re doing and why.
 <table class="table table-striped" style="width: auto !important; ">
  <thead>
@@ -97,7 +54,7 @@ a	Remove all observations where the participant is under age 18.  No further ana
 </tbody>
 </table>
 b	Please provide (in pretty-fied table format or similar), descriptive statistics on at least 7 variables (age, Income, etc.). 
-<table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<table class="table table-striped" style="margin-left: auto; margin-right: auto;">
  <thead>
   <tr>
    <th style="text-align:left;">   </th>
@@ -182,14 +139,9 @@ c	Give the frequencies (in table format or similar) for Gender, Education, and O
 ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
 ```
 
-![](DDSAnalytics_files/figure-html/unnamed-chunk-8-2.png)<!-- -->
+![](DDSAnalytics_files/figure-html/unnamed-chunk-8-2.png)<!-- -->![](DDSAnalytics_files/figure-html/unnamed-chunk-8-3.png)<!-- -->![](DDSAnalytics_files/figure-html/unnamed-chunk-8-4.png)<!-- -->
 d	Give the counts (again, pretty table) of management positions.
 
-c	Give the frequencies (in table format or similar) for Gender, Education, and Occupation.  They can be separate tables, if that’s your choice.
-d	Give the counts (again, pretty table) of management positions.
-
-a	Note: You should make all of these appealing looking.  Remember to include things like a clean, informative title, axis labels that are in plain English, and readable axis values that do not overlap.
-b	Create barcharts in ggplot or similar  The bars should be in descending order, Use any color palette of your choice other than the default.
 c	Is there a relationship between Age and Income?  Create a scatterplot and make an assessment of whether there is a relationship.  Color each point based on the Gender of the participant.  You’re welcome to use lm() or similar functions to back up your claims.
 
 d	What about Life Satisfaction?  Create another scatterplot.  Is there a discernible relationship there to what?   
