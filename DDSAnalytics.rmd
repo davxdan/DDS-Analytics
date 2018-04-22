@@ -202,18 +202,16 @@ class(Management)
 kable(Management, "html") %>%
 kable_styling(bootstrap_options = "striped", full_width = F,position = "left")
 ```
-c	Is there a relationship between Age and Income?  Create a scatterplot and make an assessment of whether there is a relationship.  Color each point based on the Gender of the participant.  You’re welcome to use lm() or similar functions to back up your claims.
+
 ```{r}
-ggplot(CaseStudy2_data, aes(x=Age, y=DailyRate)) + geom_point()
+#http://www.sthda.com/english/wiki/ggplot2-scatter-plots-quick-start-guide-r-software-and-data-visualization
+#Is there a relationship between Age and Income?  Create a scatterplot and make an assessment of whether there is a relationship. Color each dot by gender
+ggplot(CaseStudy2_data, aes(x=Age, y=DailyRate, color=Gender)) +
+   geom_point(size=.05)+
+  geom_smooth(method = lm, color="#2F63A0", se=FALSE)
 
-ggplot(CaseStudy2_data, aes(x=Age, y=DailyRate)) +
-  geom_point(size=.5, shape=23)
-
-
-
-
-
-
+```
+```{r}
 AgevsIncome.lm<-lm(DailyRate~Age,data = CaseStudy2_data)
 #qt(0.995, 198)
 #abs(qt(0.01/2, 198))

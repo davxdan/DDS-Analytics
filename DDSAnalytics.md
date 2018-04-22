@@ -117,7 +117,7 @@ Summary of measures included in the data:
 ##Methodology
 Attrition is the central theme of this analysis. We interpreted the value "Yes" in the data provided under attrition as an indicator that the employee has left the company.
 
-We categorized each record as "Current" or "Terminated" and look for patterns in the variables that may explain why emplyees become terminated.  
+We categorized each record as "Current" or "Terminated" and look for patterns in the variables that may explain why employees become terminated.  
 
 *__Current__ meaning currently employed by the firm.*  
 *__Terminated__ meaning left the firm (voluntarily or non-voluntarily)*
@@ -182,7 +182,9 @@ d	Give the counts (again, pretty table) of management positions.
   </tr>
 </tbody>
 </table>
-c	Is there a relationship between Age and Income?  Create a scatterplot and make an assessment of whether there is a relationship.  Color each point based on the Gender of the participant.  You’re welcome to use lm() or similar functions to back up your claims.
+
+![](DDSAnalytics_files/figure-html/unnamed-chunk-10-1.png)<!-- -->
+![](DDSAnalytics_files/figure-html/unnamed-chunk-11-1.png)<!-- -->
 
 d	What about Life Satisfaction?  Create another scatterplot.  Is there a discernible relationship there to what?   
 
