@@ -38,7 +38,7 @@ The data includes a total of 1470 current and terminated employee records with 3
 </tbody>
 </table>
 Summary of measures included in the data:
-<table class="table table-striped" style="margin-left: auto; margin-right: auto;">
+<table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
  <thead>
   <tr>
    <th style="text-align:left;">   </th>
@@ -115,19 +115,15 @@ Summary of measures included in the data:
 </tbody>
 </table>
 ##Methodology
-Attrition is the central theme of this analysis. We interpreted the value of "Yes" in attrition as an indicator that the employee has left the company.
+Attrition is the central theme of this analysis. We interpreted the value "Yes" in the data provided under attrition as an indicator that the employee has left the company.
 
 We categorized each record as "Current" or "Terminated" and look for patterns in the variables that may explain why emplyees become terminated.  
 
 *__Current__ meaning currently employed by the firm.*  
 *__Terminated__ meaning left the firm (voluntarily or non-voluntarily)*
 
-
-
 <img src="DDSAnalytics_files/figure-html/unnamed-chunk-4-1.png" style="display: block; margin: auto;" />
 
-Preliminary data analysis; Data Structure, Quality Analysis etc.
-b.	The column names are either too much or not enough.  Change the column names so that they do not have spaces, underscores, slashes, and the like. All column names should be under 12 characters. Make sure you’re updating your codebook with information on the tidied data set as well.
 
 a	Remove all observations where the participant is under age 18.  No further analysis of underage individuals is permitted by your client.  Remove any other age outliers as you see fit, but be sure to tell what you’re doing and why.
 <table class="table table-striped" style="width: auto !important; ">
