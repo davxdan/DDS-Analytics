@@ -8,7 +8,7 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = FALSE)
 ```
 Info
 ```{r}
@@ -27,6 +27,12 @@ library(readr)
 library(reshape2)
 library(wordcloud2)
 #sessionInfo()
+palette <- c("#999999", "#E69F00", "#009E73", "#0072B2", "#D55E00", "#CC79A7")
+#Orange "#E69F00"
+#Green  "#009E73"
+#Blue   "#0072B2"
+#DrkOran"#D55E00"
+#Pink   "#CC79A7"
 ```
 Oservations and Variables in the data that was provided:
 ```{r}
@@ -73,32 +79,31 @@ colnames(x)<-c("DailyRate","Number of Companies Worked","Years at Company","Year
 rownames(x)<-c("Min.","1st Qu.","Median","Mean","3rd Qu.","Max.")
 kable(x, "html") %>%
 kable_styling(bootstrap_options = "striped", full_width = F)
-
 ```
 Create a simple histogram for two of them.  Comment on the shape of the distribution in your markdown.
 ```{r}
-palette <- c("#999999", "#E69F00", "#009E73", "#0072B2", "#D55E00", "#CC79A7")
-ggplot(CaseStudy2_data, aes(x=DailyRate))+
-geom_histogram(binwidth=50,  position="identity",color="white", fill="lightblue")
+ggplot(CaseStudy2_data, aes(x=DailyRate, color=palette))+
+geom_histogram(binwidth=50, color="white" , fill="#0072B2")
 
-# ggplot(diamonds, aes(price, fill = cut)) +
-#   geom_histogram(binwidth = 500)
 ggplot(CaseStudy2_data, aes(x=NumCompaniesWorked))+
-  geom_histogram( binwidth=1,  position="identity",color="white", fill="lightblue")
+  geom_histogram( binwidth=1,  position="identity",color="white", fill="#D55E00")
+
 ```
 c	Give the frequencies (in table format or similar) for Gender, Education, and Occupation.  They can be separate tables, if that’s your choice.
 ```{r}
 ggplot(CaseStudy2_data, aes(x=Gender, color = Gender, fill=Gender)) +geom_bar(stat = "count")
+#Orange "#E69F00"
+#Green  "#009E73"
+#Blue   "#0072B2"
+#DrkOran"#D55E00"
+#Pink   "#CC79A7"
 
 ggplot(CaseStudy2_data, aes(Education, colour = EducationField)) +
-  geom_freqpoly(show.legend = TRUE,   inherit.aes = TRUE)
-# ggplot(CaseStudy2_data, aes(x=JobRole, colour = Gender)) +
-#   geom_freqpoly(stat = "count", show.legend = TRUE,   inherit.aes = TRUE)
+geom_freqpoly(show.legend = TRUE,   inherit.aes = TRUE)
 
-ggplot(CaseStudy2_data) +
-  aes(x = JobRole, fill = factor(Education)) +
-  geom_bar(position = "fill")
-head(CaseStudy2_data)
+# ggplot(CaseStudy2_data) +
+# aes(x = JobRole, fill = factor(Education)) +
+# geom_bar(position = "fill")
 ```
 d	Give the counts (again, pretty table) of management positions.
 

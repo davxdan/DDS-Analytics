@@ -10,16 +10,6 @@ output:
 
 Info
 
-```r
-rm(list=ls())
-setwd("~/GitHub/DDS-Analytics")
-library(knitr)
-library(readxl)
-library(dygraphs)
-library(tidyr)
-library(dplyr)
-```
-
 ```
 ## 
 ## Attaching package: 'dplyr'
@@ -37,15 +27,6 @@ library(dplyr)
 ##     intersect, setdiff, setequal, union
 ```
 
-```r
-library(ggplot2)
-library(forecast)
-library(xtable)
-library(kableExtra)
-library(readr)
-library(reshape2)
-```
-
 ```
 ## 
 ## Attaching package: 'reshape2'
@@ -56,30 +37,12 @@ library(reshape2)
 ## 
 ##     smiths
 ```
-
-```r
-library(wordcloud2)
-#sessionInfo()
-```
 Oservations and Variables in the data that was provided:
-
-```r
-CaseStudy2_data <- read_excel("Input/CaseStudy2-data.xlsx")
-dims<-as.data.frame(dim(CaseStudy2_data))
-  cbind.data.frame("Observations",dims)
-```
 
 ```
 ##   "Observations" dim(CaseStudy2_data)
 ## 1   Observations                 1470
 ## 2   Observations                   35
-```
-
-```r
-rownames(dims)<-c("Observations","Variables")
-colnames(dims)<-c("Count")
-               kable(dims, "html") %>%
-  kable_styling(bootstrap_options = "striped", full_width = F)
 ```
 
 <table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
@@ -103,24 +66,12 @@ colnames(dims)<-c("Count")
 Preliminary data analysis; Data Structure, Quality Analysis etc.
 b.	The column names are either too much or not enough.  Change the column names so that they do not have spaces, underscores, slashes, and the like. All column names should be under 12 characters. Make sure you’re updating your codebook with information on the tidied data set as well.
 
-```r
-class((CaseStudy2_data))
-```
-
 ```
 ## [1] "tbl_df"     "tbl"        "data.frame"
 ```
 
-```r
-unique(CaseStudy2_data$Gender)
-```
-
 ```
 ## [1] "Female" "Male"
-```
-
-```r
-unique(CaseStudy2_data$YearsAtCompany)
 ```
 
 ```
@@ -128,38 +79,23 @@ unique(CaseStudy2_data$YearsAtCompany)
 ## [24] 20 40 24 33 19 36 18 29 31 32 34 26 30 23
 ```
 
-```r
-unique(CaseStudy2_data$Attrition)
-```
-
 ```
 ## [1] "Yes" "No"
 ```
 a	Remove all observations where the participant is under age 18.  No further analysis of underage individuals is permitted by your client.  Remove any other age outliers as you see fit, but be sure to tell what you’re doing and why.
-
-```r
-underage<-min(CaseStudy2_data$Age)
-```
-b	Please provide (in pretty-fied table format or similar), descriptive statistics on at least 7 variables (age, Income, etc.).  Create a simple histogram for two of them.  Comment on the shape of the distribution in your markdown.
-
-```r
-# Interesting variables: daily rate, education,  job satisfaction,number of companies worked, performance rating,years at company, years with current manager
-
-#age<-matrix(summary(CaseStudy2_data$Age))
-dr <- matrix(summary(CaseStudy2_data$DailyRate))
-cw<-matrix(summary(CaseStudy2_data$NumCompaniesWorked))
-yac<-matrix(summary(CaseStudy2_data$YearsAtCompany))
-ywm<-matrix(summary(CaseStudy2_data$YearsWithCurrManager))
-dfh<-matrix(summary(CaseStudy2_data$DistanceFromHome))
-psh<-matrix(summary(CaseStudy2_data$PercentSalaryHike))
-ycr<-matrix(summary(CaseStudy2_data$YearsInCurrentRole))
-x<-data.frame(cbind(dr,cw,yac,ywm,dfh,psh,ycr))
-colnames(x)<-c("DailyRate","Number of Companies Worked","Years at Company","Years with Manager", "Distance From Home","Percent Salary Hike","Years in Current Role")
-rownames(x)<-c("Min.","1st Qu.","Median","Mean","3rd Qu.","Max.")
-kable(x, "html") %>%
-  kable_styling(bootstrap_options = "striped", full_width = F)
-```
-
+<table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
+ <thead>
+  <tr>
+   <th style="text-align:right;"> Youngest Age of Participants </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:right;"> 18 </td>
+  </tr>
+</tbody>
+</table>
+b	Please provide (in pretty-fied table format or similar), descriptive statistics on at least 7 variables (age, Income, etc.). 
 <table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
  <thead>
   <tr>
@@ -236,54 +172,17 @@ kable(x, "html") %>%
   </tr>
 </tbody>
 </table>
-
-```r
-palette <- c("#999999", "#E69F00", "#009E73", "#0072B2", "#D55E00", "#CC79A7")
-ggplot(CaseStudy2_data, aes(x=DailyRate))+
-  geom_histogram(binwidth=50,  position="identity",color="white", fill="lightblue")
-```
-
-![](DDSAnalytics_files/figure-html/unnamed-chunk-5-1.png)<!-- -->
-
-```r
-# ggplot(diamonds, aes(price, fill = cut)) +
-#   geom_histogram(binwidth = 500)
-ggplot(CaseStudy2_data, aes(x=NumCompaniesWorked))+
-  geom_histogram( binwidth=1,  position="identity",color="white", fill="lightblue")
-```
-
-![](DDSAnalytics_files/figure-html/unnamed-chunk-5-2.png)<!-- -->
-
-```r
-# Variables to avoid:Age, Gender, marital status, relationship statisfaction, total working years(Use caution)
-```
+Create a simple histogram for two of them.  Comment on the shape of the distribution in your markdown.
+![](DDSAnalytics_files/figure-html/unnamed-chunk-6-1.png)<!-- -->![](DDSAnalytics_files/figure-html/unnamed-chunk-6-2.png)<!-- -->
 c	Give the frequencies (in table format or similar) for Gender, Education, and Occupation.  They can be separate tables, if that’s your choice.
-
-d	Give the counts (again, pretty table) of management positions.
-
-
-```r
-ggplot(CaseStudy2_data, aes(x=Gender)) +geom_bar(stat = "count")
-```
-
-![](DDSAnalytics_files/figure-html/unnamed-chunk-6-1.png)<!-- -->
-
-```r
-ggplot(CaseStudy2_data, aes(Education, colour = EducationField)) +
-  geom_freqpoly(show.legend = TRUE,   inherit.aes = TRUE)
-```
+![](DDSAnalytics_files/figure-html/unnamed-chunk-7-1.png)<!-- -->
 
 ```
 ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
 ```
 
-![](DDSAnalytics_files/figure-html/unnamed-chunk-6-2.png)<!-- -->
-
-```r
-# ggplot(CaseStudy2_data, aes(x=JobRole, colour = Gender)) +
-#   geom_freqpoly(stat = "count", show.legend = TRUE,   inherit.aes = TRUE)
-```
-
+![](DDSAnalytics_files/figure-html/unnamed-chunk-7-2.png)<!-- -->
+d	Give the counts (again, pretty table) of management positions.
 
 
 
