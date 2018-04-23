@@ -209,6 +209,7 @@ ggplot(CaseStudy2_data, aes(x=Age, y=DailyRate, color=Gender)) +
   geom_smooth(method = lm, color="#484848",lwd = 1, se=FALSE)
 
 ```
+d	What about Life Satisfaction?  Create another scatterplot.  Is there a discernible relationship there to what? 
 ```{r}
 AgevsIncome.lm<-lm(DailyRate~Age,data = CaseStudy2_data)
 #qt(0.995, 198)
@@ -240,9 +241,12 @@ lines(SortedAge,prd_p[,3],col = "orange",lty = 2, lwd = 1)
 #   geom_ribbon(data=pred_interval, aes(ymin = lwr, ymax = upr), fill = "blue", alpha = 0.2) 
 ```
 
-d	What about Life Satisfaction?  Create another scatterplot.  Is there a discernible relationship there to what?   
-
 determine factors that lead to attrition
+
+```{r}
+# This site has some variable selection methods https://cran.r-project.org/web/packages/olsrr/vignettes/variable_selection.html
+
+```
 identify (at least) the top three factors that contribute to turnover
 The business is also interested in learning about any job role specific trends that may exist in the data set (e.g., “Data Scientists have the highest job satisfaction”
 
