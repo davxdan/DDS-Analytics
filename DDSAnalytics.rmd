@@ -39,8 +39,6 @@ sessionInfo()
 
 #establish a color palette for consistency
 palette <- c('#073857','#4E91DD','#A13764','#7D9099','#32C3A4','#2F63A0','#484848','#2C707E','#D1A34F','#E34A46','#FCFCFC')
-#Orange="#E69F00",Green="#009E73",Blue="#0072B2",DrkOran="#D55E00",Pink="#CC79A7", red="#AC3E31"
-
 ```
 ## Business Objective
 The leadership has identified predicting employee turnover as its first application of data science for talent management. Before investing in the project they would like an analysis of existing employee data.  
@@ -70,7 +68,6 @@ Summary of measures included in the data:
 # Interesting variables: daily rate, education,  job satisfaction,number of companies worked, performance rating,years at company, years with current manager
 
 #Variables to use with caution (i.e discrimination law, ethics:Age, Gender, marital status, relationship statisfaction, total working years
-
 
 #create a dataframe with descriptive statistics of quantitative variables
 dr <- matrix(summary(CaseStudy2_data$DailyRate))
@@ -114,7 +111,6 @@ CaseStudy2_data$EmployeeStatus[CaseStudy2_data$Attrition == "No"] <- "Current"
 ggplot(CaseStudy2_data, aes(x=EmployeeStatus,  fill=EmployeeStatus))+
 labs(title="Employees", x = "", y="Count", fill="Status") +geom_bar(stat = "count") +
   scale_fill_manual(values=c("#2F63A0","#7D9099"))
-  
 ```
 
 ```{r,include=FALSE}
@@ -151,7 +147,7 @@ ggplot(CaseStudy2_data, aes(x=NumCompaniesWorked,fill = EmployeeStatus))+
   scale_fill_manual(values=c("#2F63A0","#7D9099"))
 ```
 c	Give the frequencies (in table format or similar) for Gender, Education, and Occupation.  They can be separate tables, if that’s your choice.
-```{r}
+```{r,fig.align='center'}
 #Gender Frequency
 ggplot(CaseStudy2_data, aes(x=Gender,  fill=Gender)) +geom_bar(stat = "count") +
   scale_fill_manual(values=c("#A13764","#2F63A0"))
@@ -202,14 +198,15 @@ class(Management)
 kable(Management, "html") %>%
 kable_styling(bootstrap_options = "striped", full_width = F,position = "left")
 ```
-
-```{r}
+There's no apparent relationship between Age and Income. The plot below shows a very slight upward incline as age increases but is relatively insignificant. 
+```{r,fig.align='center'}
 #referenced http://www.sthda.com/english/wiki/ggplot2-scatter-plots-quick-start-guide-r-software-and-data-visualization
 
 #Is there a relationship between Age and Income?  Create a scatterplot and make an assessment of whether there is a relationship. Color each dot by gender
 ggplot(CaseStudy2_data, aes(x=Age, y=DailyRate, color=Gender)) +
-   geom_point(size=.05)+
-  geom_smooth(method = lm, color="#2F63A0", se=FALSE)
+   geom_point(size=2)+
+  scale_color_manual(values = c("#A13764","#2F63A0"))+
+  geom_smooth(method = lm, color="#484848",lwd = 1, se=FALSE)
 
 ```
 ```{r}

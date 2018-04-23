@@ -149,7 +149,7 @@ We advise caution be used in decision making based on the following variables fo
 The following graph shows the distribution of employees by daily pay rate.
 <img src="DDSAnalytics_files/figure-html/unnamed-chunk-7-1.png" style="display: block; margin: auto;" /><img src="DDSAnalytics_files/figure-html/unnamed-chunk-7-2.png" style="display: block; margin: auto;" />
 c	Give the frequencies (in table format or similar) for Gender, Education, and Occupation.  They can be separate tables, if that’s your choice.
-![](DDSAnalytics_files/figure-html/unnamed-chunk-8-1.png)<!-- -->![](DDSAnalytics_files/figure-html/unnamed-chunk-8-2.png)<!-- -->
+<img src="DDSAnalytics_files/figure-html/unnamed-chunk-8-1.png" style="display: block; margin: auto;" /><img src="DDSAnalytics_files/figure-html/unnamed-chunk-8-2.png" style="display: block; margin: auto;" />
 d	Give the counts (again, pretty table) of management positions.
 
 ```
@@ -182,8 +182,8 @@ d	Give the counts (again, pretty table) of management positions.
   </tr>
 </tbody>
 </table>
-
-![](DDSAnalytics_files/figure-html/unnamed-chunk-10-1.png)<!-- -->
+There's no apparent relationship between Age and Income. The plot below shows a very slight upward incline as age increases but is relatively insignificant. 
+<img src="DDSAnalytics_files/figure-html/unnamed-chunk-10-1.png" style="display: block; margin: auto;" />
 ![](DDSAnalytics_files/figure-html/unnamed-chunk-11-1.png)<!-- -->
 
 d	What about Life Satisfaction?  Create another scatterplot.  Is there a discernible relationship there to what?   
