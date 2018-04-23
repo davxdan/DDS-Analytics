@@ -184,11 +184,13 @@ d	Give the counts (again, pretty table) of management positions.
 </table>
 There's no apparent relationship between Age and Income. The plot below shows a very slight upward incline as age increases but is relatively insignificant. 
 <img src="DDSAnalytics_files/figure-html/unnamed-chunk-10-1.png" style="display: block; margin: auto;" />
-![](DDSAnalytics_files/figure-html/unnamed-chunk-11-1.png)<!-- -->
-
-d	What about Life Satisfaction?  Create another scatterplot.  Is there a discernible relationship there to what?   
+d	What about Life Satisfaction?  Create another scatterplot.  Is there a discernible relationship there to what? 
+![](DDSAnalytics_files/figure-html/unnamed-chunk-11-1.png)<!-- -->![](DDSAnalytics_files/figure-html/unnamed-chunk-11-2.png)<!-- -->![](DDSAnalytics_files/figure-html/unnamed-chunk-11-3.png)<!-- -->
+![](DDSAnalytics_files/figure-html/unnamed-chunk-12-1.png)<!-- -->
 
 determine factors that lead to attrition
+
+
 identify (at least) the top three factors that contribute to turnover
 The business is also interested in learning about any job role specific trends that may exist in the data set (e.g., “Data Scientists have the highest job satisfaction”
 

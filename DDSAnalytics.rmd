@@ -16,7 +16,8 @@ knitr::opts_chunk$set(echo = FALSE)
 rm(list=ls()) 
 
 #set the working directory
-setwd("~/GitHub/DDS-Analytics") 
+#setwd("~/GitHub/DDS-Analytics") 
+setwd("C:/Users/i711214/Desktop/DDS-Analytics")
 
 #load Libraries
 library(knitr)
@@ -69,7 +70,7 @@ Summary of measures included in the data:
 
 #Variables to use with caution (i.e discrimination law, ethics:Age, Gender, marital status, relationship statisfaction, total working years
 
-#create a dataframe with descriptive statistics of quantitative variables
+#create a dataframe with descriptive statistics of quantitative variables.
 dr <- matrix(summary(CaseStudy2_data$DailyRate))
 cw<-matrix(summary(CaseStudy2_data$NumCompaniesWorked))
 yac<-matrix(summary(CaseStudy2_data$YearsAtCompany))
@@ -97,6 +98,9 @@ We categorized each record as "Current" or "Terminated" and look for patterns in
 ```{r Add Employee Status, include=FALSE}
 #Initialize Employee Status Column
 EmployeeStatus<-as.character("Derp") 
+
+#For some reason I get an error when initializing EmployeeStatus. It seems like the code is getting ahead of itself trying to cbind(CaseStudy2_data, EmployeeStatus) Until I ge ta chance to figure out how to initialize it properly I inserted this 1 second pause:
+Sys.sleep(1)
 
 #Add Employee Status to the CaseStudy2_data dataframe.
 cbind(CaseStudy2_data, EmployeeStatus)
@@ -207,9 +211,74 @@ ggplot(CaseStudy2_data, aes(x=Age, y=DailyRate, color=Gender)) +
    geom_point(size=2)+
   scale_color_manual(values = c("#A13764","#2F63A0"))+
   geom_smooth(method = lm, color="#484848",lwd = 1, se=FALSE)
-
 ```
 d	What about Life Satisfaction?  Create another scatterplot.  Is there a discernible relationship there to what? 
+```{r}
+
+ggplot(CaseStudy2_data, aes(x=EnvironmentSatisfaction,y = YearsAtCompany, color=EmployeeStatus )) +
+   geom_point(size=3)+
+  scale_color_manual(values = c("#2F63A0","#7D9099"))+
+  geom_smooth(method = lm, color="#484848",lwd = 1, se=FALSE)
+
+# tmp.data<-c(1,2,3) 
+# if(tmp.data[1]!="no value") {
+#    p = p + geom_point()
+# }
+# p + geom_line()
+
+ggplot(CaseStudy2_data, aes(x=JobSatisfaction,y = YearsAtCompany, color=EmployeeStatus )) +
+   geom_point(size=3)+
+  scale_color_manual(values = c("#2F63A0","#7D9099"))+
+  geom_smooth(method = lm, color="#484848",lwd = 1, se=FALSE)
+
+ggplot(CaseStudy2_data, aes(x=RelationshipSatisfaction,y = YearsAtCompany, color=EmployeeStatus )) +
+   geom_point(size=3)+
+  scale_color_manual(values = c("#2F63A0","#7D9099"))+
+  geom_smooth(method = lm, color="#484848",lwd = 1, se=FALSE)
+
+# Education	
+#   1 'Below College'
+# 	2 'College'
+# 	3 'Bachelor'
+# 	4 'Master'
+# 	5 'Doctor'
+	
+# EnvironmentSatisfaction
+#   1 'Low'
+# 	2 'Medium'
+# 	3 'High'
+# 	4 'Very High'
+
+# JobInvolvement
+#   1 'Low'
+# 	2 'Medium'
+# 	3 'High'
+# 	4 'Very High'
+
+# JobSatisfaction	
+#   1 'Low'
+# 	2 'Medium'
+# 	3 'High'
+# 	4 'Very High'
+
+# PerformanceRating	
+# 1 'Low'
+# 	2 'Good'
+# 	3 'Excellent'
+# 	4 'Outstanding'
+# 	
+# RelationshipSatisfaction	
+#   1 'Low'
+# 	2 'Medium'
+# 	3 'High'
+# 	4 'Very High'
+# 	
+# WorkLifeBalance	
+#   1 'Bad'
+# 	2 'Good'
+# 	3 'Better'
+# 	4 'Best'
+```
 ```{r}
 AgevsIncome.lm<-lm(DailyRate~Age,data = CaseStudy2_data)
 #qt(0.995, 198)
