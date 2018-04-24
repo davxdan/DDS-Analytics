@@ -141,11 +141,7 @@ The following graph shows the distribution of employees by hourly rate.
 <img src="DDSAnalytics_files/figure-html/unnamed-chunk-7-1.png" style="display: block; margin: auto;" /><img src="DDSAnalytics_files/figure-html/unnamed-chunk-7-2.png" style="display: block; margin: auto;" />
 c	Give the frequencies (in table format or similar) for Gender, Education, and Occupation.  They can be separate tables, if that’s your choice.
 <img src="DDSAnalytics_files/figure-html/unnamed-chunk-8-1.png" style="display: block; margin: auto;" /><img src="DDSAnalytics_files/figure-html/unnamed-chunk-8-2.png" style="display: block; margin: auto;" /><img src="DDSAnalytics_files/figure-html/unnamed-chunk-8-3.png" style="display: block; margin: auto;" />
-d	Give the counts (again, pretty table) of management positions.
-
-```
-## [1] "data.frame"
-```
+As requested we have captured the counts of management positions in the table below:
 
 <table class="table table-striped" style="width: auto !important; ">
  <thead>
@@ -173,10 +169,12 @@ d	Give the counts (again, pretty table) of management positions.
   </tr>
 </tbody>
 </table>
-There's no apparent relationship between Age and Income. The plot below shows a very slight upward incline as age increases but is relatively insignificant. 
-<img src="DDSAnalytics_files/figure-html/unnamed-chunk-10-1.png" style="display: block; margin: auto;" />
-d	What about Life Satisfaction?  Create another scatterplot.  Is there a discernible relationship there to what? 
-![](DDSAnalytics_files/figure-html/unnamed-chunk-11-1.png)<!-- -->![](DDSAnalytics_files/figure-html/unnamed-chunk-11-2.png)<!-- -->![](DDSAnalytics_files/figure-html/unnamed-chunk-11-3.png)<!-- -->
+####Is there a relationship between Age and Income?  
+There's no apparent relationship between Age and Income. The plot below shows a very slight upward incline as age increases but is relatively insignificant.  
+<img src="DDSAnalytics_files/figure-html/unnamed-chunk-11-1.png" style="display: block; margin: auto;" />
+####Is there a relationship between life satisfaction and any other attribute?  
+
+<img src="DDSAnalytics_files/figure-html/unnamed-chunk-12-1.png" style="display: block; margin: auto;" /><img src="DDSAnalytics_files/figure-html/unnamed-chunk-12-2.png" style="display: block; margin: auto;" /><img src="DDSAnalytics_files/figure-html/unnamed-chunk-12-3.png" style="display: block; margin: auto;" />
 Using the Stepwise Variable selction method we have determined that the most effective predictors of years with the company are YearsWithCurrManager  ,	TrainingTimesLastYear,	YearsInCurrentRole   ,	YearsSinceLastPromotion ,	NumCompaniesWorked,	Age,	MonthlyIncome,	JobInvolvement,	PercentSalaryHike,	DailyRate
 
 These factors can be used to predict how long in years and employee will stay with the company

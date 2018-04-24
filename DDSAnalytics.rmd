@@ -147,23 +147,22 @@ ggplot(CaseStudy2_data, aes(x=NumCompaniesWorked,fill = EmployeeStatus))+
 ```
 c	Give the frequencies (in table format or similar) for Gender, Education, and Occupation.  They can be separate tables, if that’s your choice.
 ```{r,fig.align='center'}
-#Gender Frequency
-ggplot(CaseStudy2_data, aes(x=Gender,  fill=Gender)) +geom_bar(stat = "count") +
-  scale_fill_manual(values=c("#A13764","#2F63A0"))
-
-#Occupation
-ggplot(CaseStudy2_data, aes(x=JobRole,  fill=JobRole)) +geom_bar(stat = "count") +
-  scale_fill_manual(values=palette) +
-  coord_flip()
-
+#Education Frequency
 ggplot(CaseStudy2_data, aes(x=Education,fill = EmployeeStatus))+
   geom_histogram( binwidth=1, position = position_stack(reverse = TRUE),color="white") +
   scale_fill_manual(values=c("#2F63A0","#7D9099"))
 
+#Gender Frequency
+ggplot(CaseStudy2_data, aes(x=Gender,  fill=Gender)) +geom_bar(stat = "count") +
+  scale_fill_manual(values=c("#A13764","#2F63A0"))
 
+#Occupation Frequency
+ggplot(CaseStudy2_data, aes(x=JobRole,  fill=JobRole)) +geom_bar(stat = "count") +
+  scale_fill_manual(values=palette) +
+  coord_flip()
 ```
-d	Give the counts (again, pretty table) of management positions.
-```{r}
+As requested we have captured the counts of management positions in the table below:
+```{r,include=FALSE}
 #Need to come back and make this into a function
 #Get counts of each management category
 
@@ -190,12 +189,14 @@ colnames(countResearchDirectors)<-c("Research Directors")
 #Combine the counts into a dataframe
 Management<-as.data.frame(t(cbind(countsalesExecs,countManufactureDirectors,countManagers,countResearchDirectors)))
 class(Management)
-
+```
+```{r,fig.align='left'}
 #Display a table
 kable(Management, "html") %>%
 kable_styling(bootstrap_options = "striped", full_width = F,position = "left")
 ```
-There's no apparent relationship between Age and Income. The plot below shows a very slight upward incline as age increases but is relatively insignificant. 
+####Is there a relationship between Age and Income?  
+There's no apparent relationship between Age and Income. The plot below shows a very slight upward incline as age increases but is relatively insignificant.  
 ```{r,fig.align='center'}
 #referenced http://www.sthda.com/english/wiki/ggplot2-scatter-plots-quick-start-guide-r-software-and-data-visualization
 
@@ -205,23 +206,30 @@ ggplot(CaseStudy2_data, aes(x=Age, y=DailyRate, color=Gender)) +
   scale_color_manual(values = c("#A13764","#2F63A0"))+
   geom_smooth(method = lm, color="#484848",lwd = 1, se=FALSE)
 ```
-d	What about Life Satisfaction?  Create another scatterplot.  Is there a discernible relationship there to what? 
-```{r}
-ggplot(CaseStudy2_data, aes(x=EnvironmentSatisfaction,y = YearsAtCompany, color=EmployeeStatus )) +
-   geom_point(size=3)+
-  scale_color_manual(values = c("#2F63A0","#7D9099"))+
-  geom_smooth(method = lm, color="#484848",lwd = 1, se=FALSE)
+####Is there a relationship between life satisfaction and any other attribute?  
+Yes. There is a 
+Job Satisfaction is mostly determined by HourlyRate and the Number of Companies Worked
 
-# tmp.data<-c(1,2,3) 
-# if(tmp.data[1]!="no value") {
-#    p = p + geom_point()
-# }
-# p + geom_line()
+```{r,fig.align='center'}
 
+#Create dataset of only the numeric categoricals
+MyPredictionData<-data.frame(cbind(CaseStudy2_data$Age, CaseStudy2_data$DailyRate, CaseStudy2_data$DistanceFromHome, CaseStudy2_data$Education, CaseStudy2_data$EnvironmentSatisfaction, CaseStudy2_data$HourlyRate,CaseStudy2_data$JobInvolvement, CaseStudy2_data$JobLevel, CaseStudy2_data$JobSatisfaction, CaseStudy2_data$MonthlyIncome, CaseStudy2_data$MonthlyRate, CaseStudy2_data$NumCompaniesWorked, CaseStudy2_data$PercentSalaryHike, CaseStudy2_data$PerformanceRating, CaseStudy2_data$RelationshipSatisfaction,CaseStudy2_data$TrainingTimesLastYear, CaseStudy2_data$WorkLifeBalance,CaseStudy2_data$TotalWorkingYears,CaseStudy2_data$StockOptionLevel, CaseStudy2_data$YearsAtCompany, CaseStudy2_data$YearsInCurrentRole, CaseStudy2_data$YearsSinceLastPromotion, CaseStudy2_data$YearsWithCurrManager))
+#Set the column Names of the MyPredictionData dataframe
+colnames(MyPredictionData)<-c("Age","DailyRate","DistanceFromHome","Education","EnvironmentSatisfaction","HourlyRate","JobInvolvement","JobLevel","JobSatisfaction","MonthlyIncome","MonthlyRate","NumCompaniesWorked","PercentSalaryHike","PerformanceRating","RelationshipSatisfaction","StockOptionLevel","TotalWorkingYears","TrainingTimesLastYear","WorkLifeBalance","YearsAtCompany","YearsInCurrentRole","YearsSinceLastPromotion","YearsWithCurrManager")
+
+#Identify Predictive Variables for Life Satisfaction
+model <- lm(JobSatisfaction ~ ., data = MyPredictionData)
+JobSatisfaction.lm<-ols_step_both_p(model)
+#HourlyRate and NumCOmpanies Worked are best predictors
+fitmodel <- lm(JobSatisfaction ~ HourlyRate+NumCompaniesWorked , data = MyPredictionData)
+JobSatisfaction.lm<-ols_step_both_p(model)
+
+plot(JobSatisfaction.lm)
+plot(fitmodel)
 ggplot(CaseStudy2_data, aes(x=JobSatisfaction,y = YearsAtCompany, color=EmployeeStatus )) +
    geom_point(size=3)+
   scale_color_manual(values = c("#2F63A0","#7D9099"))+
-  geom_smooth(method = lm, color="#484848",lwd = 1, se=FALSE)
+  geom_smooth(method = lm, color="#484848",lwd = 1, se=FALSE, formula =)
 
 ggplot(CaseStudy2_data, aes(x=RelationshipSatisfaction,y = YearsAtCompany, color=EmployeeStatus )) +
    geom_point(size=3)+
@@ -245,11 +253,7 @@ Inference can only be drawn to the employees in our dataset and not an larger ex
 ```{r}
 #Reference  https://cran.r-project.org/web/packages/olsrr/vignettes/variable_selection.html
 
-#Create dataset of only the numeric categoricals
-MyPredictionData<-data.frame(cbind(CaseStudy2_data$Age, CaseStudy2_data$DailyRate, CaseStudy2_data$DistanceFromHome, CaseStudy2_data$Education, CaseStudy2_data$EnvironmentSatisfaction, CaseStudy2_data$HourlyRate,CaseStudy2_data$JobInvolvement, CaseStudy2_data$JobLevel, CaseStudy2_data$JobSatisfaction, CaseStudy2_data$MonthlyIncome, CaseStudy2_data$MonthlyRate, CaseStudy2_data$NumCompaniesWorked, CaseStudy2_data$PercentSalaryHike, CaseStudy2_data$PerformanceRating, CaseStudy2_data$RelationshipSatisfaction,CaseStudy2_data$TrainingTimesLastYear, CaseStudy2_data$WorkLifeBalance,CaseStudy2_data$TotalWorkingYears,CaseStudy2_data$StockOptionLevel, CaseStudy2_data$YearsAtCompany, CaseStudy2_data$YearsInCurrentRole, CaseStudy2_data$YearsSinceLastPromotion, CaseStudy2_data$YearsWithCurrManager))
 
-#Set the column Names of the MyPredictionData dataframe
-colnames(MyPredictionData)<-c("Age","DailyRate","DistanceFromHome","Education","EnvironmentSatisfaction","HourlyRate","JobInvolvement","JobLevel","JobSatisfaction","MonthlyIncome","MonthlyRate","NumCompaniesWorked","PercentSalaryHike","PerformanceRating","RelationshipSatisfaction","StockOptionLevel","TotalWorkingYears","TrainingTimesLastYear","WorkLifeBalance","YearsAtCompany","YearsInCurrentRole","YearsSinceLastPromotion","YearsWithCurrManager")
 
 #Other Methods of Variable Selection that were Attempted
   # Stepwise forward regression
