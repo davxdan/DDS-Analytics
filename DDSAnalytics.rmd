@@ -16,8 +16,8 @@ knitr::opts_chunk$set(echo = FALSE)
 rm(list=ls()) 
 
 #set the working directory
-#setwd("~/GitHub/DDS-Analytics") 
-setwd("C:/Users/i711214/Desktop/DDS-Analytics")
+setwd("~/GitHub/DDS-Analytics") 
+#setwd("C:/Users/i711214/Desktop/DDS-Analytics")
 
 #load Libraries
 library(knitr)
@@ -141,6 +141,7 @@ We advise caution be used in decision making based on the following variables fo
 
 The following graph shows the distribution of employees by daily pay rate.
 ```{r,fig.align='center'}
+#Fix labels, maybe switch to monthly rather than daily.
 ggplot(CaseStudy2_data, aes(x=DailyRate,fill = EmployeeStatus))+
   labs(title="Employees by Daily Pay Rate", x = "", y="Count", fill="Status") +
 geom_histogram(binwidth=50, color="white") +
@@ -321,7 +322,6 @@ The business is also interested in learning about any job role specific trends t
 
 •	Evaluation/Results
 •	Tell me the percentages
-•	The top three factors that contribute to turnover
 •	Tell me about any job role specific trends that may exist in the data set
 •	Provide any other interesting trends and observations from your analysis
 •	Other things to consider?

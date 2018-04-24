@@ -196,7 +196,6 @@ The business is also interested in learning about any job role specific trends t
 
 •	Evaluation/Results
 •	Tell me the percentages
-•	The top three factors that contribute to turnover
 •	Tell me about any job role specific trends that may exist in the data set
 •	Provide any other interesting trends and observations from your analysis
 •	Other things to consider?
