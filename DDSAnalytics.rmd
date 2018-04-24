@@ -16,7 +16,8 @@ knitr::opts_chunk$set(echo = FALSE)
 rm(list=ls()) 
 
 #set the working directory
-setwd("~/GitHub/DDS-Analytics") 
+#setwd("~/GitHub/DDS-Analytics") 
+setwd("C:/Users/i711214/Desktop/DDS-Analytics")
 
 #load Libraries
 library(olsrr)
@@ -150,18 +151,16 @@ c	Give the frequencies (in table format or similar) for Gender, Education, and O
 ggplot(CaseStudy2_data, aes(x=Gender,  fill=Gender)) +geom_bar(stat = "count") +
   scale_fill_manual(values=c("#A13764","#2F63A0"))
 
-#Education and Occupation
-ggplot(CaseStudy2_data, aes(x=Education,  fill=JobRole)) +geom_bar(stat = "count") +
-  scale_fill_manual(values=palette)
+#Occupation
+ggplot(CaseStudy2_data, aes(x=JobRole,  fill=JobRole)) +geom_bar(stat = "count") +
+  scale_fill_manual(values=palette) +
+  coord_flip()
 
-# ggplot(CaseStudy2_data) +
-# aes(x = JobRole, fill = factor(Attrition)) +
-# geom_bar(position = "fill") +
-#   coord_flip()
-# ggplot(CaseStudy2_data) +
-# aes(x = JobRole, fill = factor(Attrition)) +
-# geom_bar(position = "fill") +
-#   coord_flip()
+ggplot(CaseStudy2_data, aes(x=Education,fill = EmployeeStatus))+
+  geom_histogram( binwidth=1, position = position_stack(reverse = TRUE),color="white") +
+  scale_fill_manual(values=c("#2F63A0","#7D9099"))
+
+
 ```
 d	Give the counts (again, pretty table) of management positions.
 ```{r}
