@@ -115,7 +115,7 @@ Summary of measures included in the data:
 </tbody>
 </table>
 ##Methodology
-Attrition is the central theme of this analysis. We interpreted the value "Yes" in the data provided under attrition as an indicator that the employee has left the company.
+Attrition is the central theme of this analysis. We interpreted the value "Yes" in the data provided under attrition as an indicator that the employee is terminated.
 
 We categorized each record as "Current" or "Terminated" and look for patterns in the variables that may explain why employees become terminated.  
 
@@ -124,11 +124,11 @@ We categorized each record as "Current" or "Terminated" and look for patterns in
 
 <img src="DDSAnalytics_files/figure-html/unnamed-chunk-4-1.png" style="display: block; margin: auto;" />
 
-As requested employees under the age of 18 have been excluded from this analsyis.
+As requested employees under the age of 18 have been excluded from this analsyis. The table below shows the youngest age record included in the data:
 <table class="table table-striped" style="width: auto !important; ">
  <thead>
   <tr>
-   <th style="text-align:right;"> Youngest Employee </th>
+   <th style="text-align:right;"> Youngest Age Record </th>
   </tr>
  </thead>
 <tbody>
@@ -137,10 +137,16 @@ As requested employees under the age of 18 have been excluded from this analsyis
   </tr>
 </tbody>
 </table>
-The following graph shows the distribution of employees by hourly rate.
+####Distributions  
+The following are the distributions of employees by various measures.
 <img src="DDSAnalytics_files/figure-html/unnamed-chunk-7-1.png" style="display: block; margin: auto;" /><img src="DDSAnalytics_files/figure-html/unnamed-chunk-7-2.png" style="display: block; margin: auto;" />
-c	Give the frequencies (in table format or similar) for Gender, Education, and Occupation.  They can be separate tables, if that’s your choice.
-<img src="DDSAnalytics_files/figure-html/unnamed-chunk-8-1.png" style="display: block; margin: auto;" /><img src="DDSAnalytics_files/figure-html/unnamed-chunk-8-2.png" style="display: block; margin: auto;" /><img src="DDSAnalytics_files/figure-html/unnamed-chunk-8-3.png" style="display: block; margin: auto;" />
+
+<img src="DDSAnalytics_files/figure-html/unnamed-chunk-8-1.png" style="display: block; margin: auto;" />
+
+####Frequencies  
+The following are frequencies by Gender and Job Roles
+<img src="DDSAnalytics_files/figure-html/unnamed-chunk-9-1.png" style="display: block; margin: auto;" /><img src="DDSAnalytics_files/figure-html/unnamed-chunk-9-2.png" style="display: block; margin: auto;" />
+  
 As requested we have captured the counts of management positions in the table below:
 
 <table class="table table-striped" style="width: auto !important; ">
@@ -171,13 +177,17 @@ As requested we have captured the counts of management positions in the table be
 </table>
 ####Is there a relationship between Age and Income?  
 There's no apparent relationship between Age and Income. The plot below shows a very slight upward incline as age increases but is relatively insignificant.  
-<img src="DDSAnalytics_files/figure-html/unnamed-chunk-11-1.png" style="display: block; margin: auto;" />
+<img src="DDSAnalytics_files/figure-html/unnamed-chunk-12-1.png" style="display: block; margin: auto;" />
+
 ####Is there a relationship between life satisfaction and any other attribute?  
 
-<img src="DDSAnalytics_files/figure-html/unnamed-chunk-12-1.png" style="display: block; margin: auto;" /><img src="DDSAnalytics_files/figure-html/unnamed-chunk-12-2.png" style="display: block; margin: auto;" /><img src="DDSAnalytics_files/figure-html/unnamed-chunk-12-3.png" style="display: block; margin: auto;" />
-Using the Stepwise Variable selction method we have determined that the most effective predictors of years with the company are YearsWithCurrManager  ,	TrainingTimesLastYear,	YearsInCurrentRole   ,	YearsSinceLastPromotion ,	NumCompaniesWorked,	Age,	MonthlyIncome,	JobInvolvement,	PercentSalaryHike,	DailyRate
+<img src="DDSAnalytics_files/figure-html/unnamed-chunk-13-1.png" style="display: block; margin: auto;" /><img src="DDSAnalytics_files/figure-html/unnamed-chunk-13-2.png" style="display: block; margin: auto;" />
 
-These factors can be used to predict how long in years and employee will stay with the company
+####What are the top 3 factors that lead to attrition?
+
+Using the Stepwise Variable selction method we have determined that the most effective predictors of years with the company are Years with Current Manager, Training Times Last Year,	Years In CurrentRole,	Years Since Last Promotion,	Number of Companies Worked,	Age,	Monthly Income,	Job Involvement, Percent Salary Hike and DailyRate.
+
+These factors can be used to predict how long in years an employee will stay with the company using a statistical formula.
 
 We advise caution be used in decision making based on the following variables for ethical or even legal reasons:
 * Gender  
@@ -186,9 +196,17 @@ We advise caution be used in decision making based on the following variables fo
 * Total Working Years
 * Age
 
-Our model actually only uses one of these factors (Age) which if used as a factor in decision making could be considered discriminatory therefor this analysis should be used with caution.
+Our model actually only uses one of these factors (Age) which if used as a factor in decision making could be considered discriminatory therefore this analysis should be used with caution.
 
 Inference can only be drawn to the employees in our dataset and not an larger external population.
+
+
+
+The top 3 factors that predict how long an employee will stay with the company in years are Years With Current Manager, Training Times Last Year and YearsInCurrentRole    
+
+Though this analysis is significant it is merely a proof of concept; higher quality results can be achieved wiht additional time and resources for analyzing the data.
+
+####Appendix
 
 ```
 ## Stepwise Selection Method   
@@ -299,8 +317,23 @@ Inference can only be drawn to the employees in our dataset and not an larger ex
 ## -------------------------------------------------------------------------------------------------------
 ```
 
-The top 3 factors that predict how long an employee will stay with the company in years are YearsWithCurrManager, TrainingTimesLastYear,     YearsInCurrentRole    
+```
+## 
+## Call:
+## lm(formula = YearsAtCompany ~ YearsWithCurrManager + TrainingTimesLastYear + 
+##     YearsInCurrentRole + YearsSinceLastPromotion + NumCompaniesWorked + 
+##     Age + MonthlyIncome + JobInvolvement + PercentSalaryHike + 
+##     DailyRate, data = MyPredictionData)
+## 
+## Coefficients:
+##             (Intercept)     YearsWithCurrManager    TrainingTimesLastYear  
+##               2.117e+00                5.626e-01                2.404e-01  
+##      YearsInCurrentRole  YearsSinceLastPromotion       NumCompaniesWorked  
+##               4.678e-01                3.104e-01               -2.857e-01  
+##                     Age            MonthlyIncome           JobInvolvement  
+##              -2.995e-02                6.177e-05               -1.914e-01  
+##       PercentSalaryHike                DailyRate  
+##              -3.578e-02               -3.204e-04
+```
 
-Though this analysis is significant it is merely a proof of concept; higher quality results can be achieved wiht additional time and resources for analyzing the data.
-
-The business is also interested in learning about any job role specific trends that may exist in the data set (e.g., “Data Scientists have the highest job satisfaction”
+![](DDSAnalytics_files/figure-html/unnamed-chunk-17-1.png)<!-- -->![](DDSAnalytics_files/figure-html/unnamed-chunk-17-2.png)<!-- -->![](DDSAnalytics_files/figure-html/unnamed-chunk-17-3.png)<!-- -->![](DDSAnalytics_files/figure-html/unnamed-chunk-17-4.png)<!-- -->
