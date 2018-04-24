@@ -11,7 +11,7 @@ output:
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-```{r Environment Information, include=FALSE}
+```{r Environment Information}
 #clear R Environment
 rm(list=ls()) 
 
@@ -50,7 +50,7 @@ Data was provided by the client in form of a .csv file "CaseStudy2-data.xlsx".
 
 ####Basic Statistics
 The data includes a total of 1470 current and terminated employee records with 35 variables. 
-```{r,include=FALSE}
+```{r}
 #load the provided excel file
 CaseStudy2_data <- read_excel("Input/CaseStudy2-data.xlsx")
 
@@ -117,7 +117,7 @@ ggplot(CaseStudy2_data, aes(x=EmployeeStatus,  fill=EmployeeStatus))+
 labs(title="Employees", x = "", y="Count", fill="Status") +geom_bar(stat = "count") +
   scale_fill_manual(values=c("#2F63A0","#7D9099"))
 ```
-```{r,include=FALSE}
+```{r}
 class((CaseStudy2_data))
 unique(CaseStudy2_data$Gender)
 unique(CaseStudy2_data$YearsAtCompany)
@@ -171,7 +171,7 @@ ggplot(CaseStudy2_data, aes(x=JobRole,  fill=JobRole)) +geom_bar(stat = "count")
 ```
   
 As requested we have captured the counts of management positions in the table below:
-```{r,include=FALSE}
+```{r}
 #Need to come back and make this into a function
 #Get counts of each management category
 
@@ -247,7 +247,7 @@ We advise caution be used in decision making based on the following variables fo
 Our model actually only uses one of these factors (Age) which if used as a factor in decision making could be considered discriminatory therefore this analysis should be used with caution.
 
 Inference can only be drawn to the employees in our dataset and not an larger external population.
-```{r,include=FALSE}
+```{r}
 #Reference  https://cran.r-project.org/web/packages/olsrr/vignettes/variable_selection.html
 #Create dataset of only the numeric categoricals
 MyPredictionData<-data.frame(cbind(CaseStudy2_data$Age, CaseStudy2_data$DailyRate, CaseStudy2_data$DistanceFromHome, CaseStudy2_data$Education, CaseStudy2_data$EnvironmentSatisfaction, CaseStudy2_data$HourlyRate,CaseStudy2_data$JobInvolvement, CaseStudy2_data$JobLevel, CaseStudy2_data$JobSatisfaction, CaseStudy2_data$MonthlyIncome, CaseStudy2_data$MonthlyRate, CaseStudy2_data$NumCompaniesWorked, CaseStudy2_data$PercentSalaryHike, CaseStudy2_data$PerformanceRating, CaseStudy2_data$RelationshipSatisfaction,CaseStudy2_data$TrainingTimesLastYear, CaseStudy2_data$WorkLifeBalance,CaseStudy2_data$TotalWorkingYears,CaseStudy2_data$StockOptionLevel, CaseStudy2_data$YearsAtCompany, CaseStudy2_data$YearsInCurrentRole, CaseStudy2_data$YearsSinceLastPromotion, CaseStudy2_data$YearsWithCurrManager))

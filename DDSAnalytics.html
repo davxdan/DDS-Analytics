@@ -126,6 +126,85 @@ $(document).ready(function () {
 </div>
 
 
+<pre><code>## 
+## Attaching package: 'olsrr'</code></pre>
+<pre><code>## The following object is masked from 'package:datasets':
+## 
+##     rivers</code></pre>
+<pre><code>## 
+## Attaching package: 'dplyr'</code></pre>
+<pre><code>## The following objects are masked from 'package:stats':
+## 
+##     filter, lag</code></pre>
+<pre><code>## The following objects are masked from 'package:base':
+## 
+##     intersect, setdiff, setequal, union</code></pre>
+<pre><code>## 
+## Attaching package: 'reshape2'</code></pre>
+<pre><code>## The following object is masked from 'package:tidyr':
+## 
+##     smiths</code></pre>
+<pre><code>## 
+## Attaching package: 'MASS'</code></pre>
+<pre><code>## The following object is masked from 'package:dplyr':
+## 
+##     select</code></pre>
+<pre><code>## The following object is masked from 'package:olsrr':
+## 
+##     cement</code></pre>
+<pre><code>## R version 3.4.4 (2018-03-15)
+## Platform: x86_64-w64-mingw32/x64 (64-bit)
+## Running under: Windows 10 x64 (build 16299)
+## 
+## Matrix products: default
+## 
+## locale:
+## [1] LC_COLLATE=English_United States.1252 
+## [2] LC_CTYPE=English_United States.1252   
+## [3] LC_MONETARY=English_United States.1252
+## [4] LC_NUMERIC=C                          
+## [5] LC_TIME=English_United States.1252    
+## 
+## attached base packages:
+## [1] stats     graphics  grDevices utils     datasets  methods   base     
+## 
+## other attached packages:
+##  [1] MASS_7.3-49      investr_1.4.0    wordcloud2_0.2.1 reshape2_1.4.3  
+##  [5] readr_1.1.1      kableExtra_0.8.0 xtable_1.8-2     forecast_8.3    
+##  [9] ggplot2_2.2.1    dplyr_0.7.4      tidyr_0.8.0      dygraphs_1.1.1.4
+## [13] readxl_1.0.0     knitr_1.20       olsrr_0.5.0     
+## 
+## loaded via a namespace (and not attached):
+##  [1] nlme_3.1-131.1     xts_0.10-2         lubridate_1.7.4   
+##  [4] dimRed_0.1.0       httr_1.3.1         rprojroot_1.3-2   
+##  [7] gh_1.0.1           tools_3.4.4        backports_1.1.2   
+## [10] R6_2.2.2           rpart_4.1-13       nortest_1.0-4     
+## [13] lazyeval_0.2.1     colorspace_1.3-2   nnet_7.3-12       
+## [16] tidyselect_0.2.4   gridExtra_2.3      mnormt_1.5-5      
+## [19] curl_3.2           compiler_3.4.4     rvest_0.3.2       
+## [22] xml2_1.2.0         tseries_0.10-44    scales_0.5.0      
+## [25] sfsmisc_1.1-2      DEoptimR_1.0-8     lmtest_0.9-36     
+## [28] fracdiff_1.4-2     psych_1.8.3.3      robustbase_0.92-8 
+## [31] quadprog_1.5-5     goftest_1.1-1      stringr_1.3.0     
+## [34] digest_0.6.15      foreign_0.8-69     rmarkdown_1.9     
+## [37] pkgconfig_2.0.1    htmltools_0.3.6    htmlwidgets_1.0   
+## [40] rlang_0.2.0        TTR_0.23-3         ddalpha_1.3.2     
+## [43] rstudioapi_0.7     quantmod_0.4-13    shiny_1.0.5       
+## [46] bindr_0.1.1        zoo_1.8-1          jsonlite_1.5      
+## [49] magrittr_1.5       Matrix_1.2-12      Rcpp_0.12.16      
+## [52] munsell_0.4.3      abind_1.4-5        stringi_1.1.7     
+## [55] yaml_2.1.18        plyr_1.8.4         recipes_0.1.2     
+## [58] grid_3.4.4         parallel_3.4.4     lattice_0.20-35   
+## [61] splines_3.4.4      hms_0.4.2          pillar_1.2.1      
+## [64] CVST_0.2-1         magic_1.5-8        urca_1.3-0        
+## [67] glue_1.2.0         evaluate_0.10.1    httpuv_1.3.6.2    
+## [70] cellranger_1.1.0   gtable_0.2.0       purrr_0.2.4       
+## [73] kernlab_0.9-25     assertthat_0.2.0   DRR_0.0.3         
+## [76] gower_0.1.2        mime_0.5           prodlim_2018.04.18
+## [79] broom_0.4.4        uroot_2.0-9        viridisLite_0.3.0 
+## [82] class_7.3-14       survival_2.41-3    geometry_0.3-6    
+## [85] timeDate_3043.102  RcppRoll_0.2.2     tibble_1.4.2      
+## [88] bindrcpp_0.2.2     lava_1.6.1         ipred_0.9-6</code></pre>
 <div id="business-objective" class="section level2">
 <h2>Business Objective</h2>
 <p>The leadership has identified predicting employee turnover as its first application of data science for talent management. Before investing in the project they would like an analysis of existing employee data.</p>
@@ -136,6 +215,9 @@ $(document).ready(function () {
 <div id="basic-statistics" class="section level4">
 <h4>Basic Statistics</h4>
 <p>The data includes a total of 1470 current and terminated employee records with 35 variables.</p>
+<pre><code>##   &quot;Observations&quot; dim(CaseStudy2_data)
+## 1   Observations                 1470
+## 2   Observations                   35</code></pre>
 <table class="table table-striped" style="width: auto !important; ">
 <thead>
 <tr>
@@ -362,6 +444,11 @@ Max.
 <p><em><strong>Current</strong> meaning currently employed by the firm.</em><br />
 <em><strong>Terminated</strong> meaning left the firm (voluntarily or non-voluntarily)</em></p>
 <p><img src="data:image/png;base64,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" style="display: block; margin: auto;" /></p>
+<pre><code>## [1] &quot;tbl_df&quot;     &quot;tbl&quot;        &quot;data.frame&quot;</code></pre>
+<pre><code>## [1] &quot;Female&quot; &quot;Male&quot;</code></pre>
+<pre><code>##  [1]  6 10  0  8  2  7  1  9  5  4 25  3 12 14 22 15 27 21 17 11 13 37 16
+## [24] 20 40 24 33 19 36 18 29 31 32 34 26 30 23</code></pre>
+<pre><code>## [1] &quot;Yes&quot; &quot;No&quot;</code></pre>
 As requested employees under the age of 18 have been excluded from this analsyis. The table below shows the youngest age record included in the data:
 <table class="table table-striped" style="width: auto !important; ">
 <thead>
@@ -456,6 +543,109 @@ Research Directors
 </ul>
 <p>Our model actually only uses one of these factors (Age) which if used as a factor in decision making could be considered discriminatory therefore this analysis should be used with caution.</p>
 <p>Inference can only be drawn to the employees in our dataset and not an larger external population.</p>
+<pre><code>## Stepwise Selection Method   
+## ---------------------------
+## 
+## Candidate Terms: 
+## 
+## 1. Age 
+## 2. DailyRate 
+## 3. DistanceFromHome 
+## 4. Education 
+## 5. EnvironmentSatisfaction 
+## 6. HourlyRate 
+## 7. JobInvolvement 
+## 8. JobLevel 
+## 9. JobSatisfaction 
+## 10. MonthlyIncome 
+## 11. MonthlyRate 
+## 12. NumCompaniesWorked 
+## 13. PercentSalaryHike 
+## 14. PerformanceRating 
+## 15. RelationshipSatisfaction 
+## 16. StockOptionLevel 
+## 17. TotalWorkingYears 
+## 18. TrainingTimesLastYear 
+## 19. WorkLifeBalance 
+## 20. YearsInCurrentRole 
+## 21. YearsSinceLastPromotion 
+## 22. YearsWithCurrManager 
+## 
+## We are selecting variables based on p value...
+## 
+## Variables Entered/Removed: 
+## 
+## - YearsWithCurrManager added 
+## - TrainingTimesLastYear added 
+## - YearsInCurrentRole added 
+## - YearsSinceLastPromotion added 
+## - NumCompaniesWorked added 
+## - Age added 
+## - MonthlyIncome added 
+## - JobInvolvement added 
+## - PercentSalaryHike added 
+## - DailyRate added 
+## 
+## No more variables to be added/removed.
+## 
+## 
+## Final Model Output 
+## ------------------
+## 
+##                         Model Summary                          
+## --------------------------------------------------------------
+## R                       0.884       RMSE                2.877 
+## R-Squared               0.781       Coef. Var          41.051 
+## Adj. R-Squared          0.779       MSE                 8.277 
+## Pred R-Squared          0.775       MAE                 1.897 
+## --------------------------------------------------------------
+##  RMSE: Root Mean Square Error 
+##  MSE: Mean Square Error 
+##  MAE: Mean Absolute Error 
+## 
+##                                  ANOVA                                   
+## ------------------------------------------------------------------------
+##                  Sum of                                                 
+##                 Squares          DF    Mean Square       F         Sig. 
+## ------------------------------------------------------------------------
+## Regression    43062.379          10       4306.238    520.292    0.0000 
+## Residual      12075.523        1459          8.277                      
+## Total         55137.902        1469                                     
+## ------------------------------------------------------------------------
+## 
+##                                         Parameter Estimates                                          
+## ----------------------------------------------------------------------------------------------------
+##                   model      Beta    Std. Error    Std. Beta      t        Sig      lower     upper 
+## ----------------------------------------------------------------------------------------------------
+##             (Intercept)     2.117         0.563                  3.756    0.000     1.011     3.222 
+##    YearsWithCurrManager     0.563         0.032        0.328    17.770    0.000     0.500     0.625 
+##   TrainingTimesLastYear     0.240         0.020        0.305    12.143    0.000     0.202     0.279 
+##      YearsInCurrentRole     0.468         0.032        0.277    14.780    0.000     0.406     0.530 
+## YearsSinceLastPromotion     0.310         0.029        0.163    10.714    0.000     0.254     0.367 
+##      NumCompaniesWorked    -0.286         0.033       -0.117    -8.769    0.000    -0.350    -0.222 
+##                     Age    -0.030         0.012       -0.045    -2.589    0.010    -0.053    -0.007 
+##           MonthlyIncome     0.000         0.000        0.047     2.443    0.015     0.000     0.000 
+##          JobInvolvement    -0.191         0.106       -0.022    -1.807    0.071    -0.399     0.016 
+##       PercentSalaryHike    -0.036         0.021       -0.021    -1.742    0.082    -0.076     0.005 
+##               DailyRate     0.000         0.000       -0.021    -1.716    0.086    -0.001     0.000 
+## ----------------------------------------------------------------------------------------------------</code></pre>
+<pre><code>## 
+##                                       Stepwise Selection Summary                                        
+## -------------------------------------------------------------------------------------------------------
+##                                     Added/                   Adj.                                          
+## Step           Variable            Removed     R-Square    R-Square      C(p)          AIC        RMSE     
+## -------------------------------------------------------------------------------------------------------
+##    1     YearsWithCurrManager      addition       0.592       0.591    1244.3580    8189.0915    3.9161    
+##    2     TrainingTimesLastYear     addition       0.687       0.687     610.6050    7798.1456    3.4274    
+##    3      YearsInCurrentRole       addition       0.744       0.744     234.6420    7504.4996    3.1005    
+##    4    YearsSinceLastPromotion    addition       0.764       0.763     107.8300    7390.4311    2.9815    
+##    5      NumCompaniesWorked       addition       0.777       0.777      19.5680    7305.2675    2.8954    
+##    6              Age              addition       0.779       0.778      13.4860    7299.2046    2.8885    
+##    7         MonthlyIncome         addition       0.780       0.779       9.2750    7294.9777    2.8833    
+##    8        JobInvolvement         addition       0.780       0.779       7.8470    7293.5298    2.8810    
+##    9       PercentSalaryHike       addition       0.781       0.779       6.6830    7292.3412    2.8788    
+##   10           DailyRate           addition       0.781       0.779       5.7510    7291.3789    2.8769    
+## -------------------------------------------------------------------------------------------------------</code></pre>
 <p>The top 3 factors that predict how long an employee will stay with the company in years are Years With Current Manager, Training Times Last Year and YearsInCurrentRole</p>
 <p>Though this analysis is significant it is merely a proof of concept; higher quality results can be achieved wiht additional time and resources for analyzing the data.</p>
 </div>
