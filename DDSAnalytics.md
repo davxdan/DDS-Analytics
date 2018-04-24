@@ -145,7 +145,8 @@ The following are the distributions of employees by various measures.
 
 ####Frequencies  
 The following are frequencies by Gender and Job Roles
-<img src="DDSAnalytics_files/figure-html/unnamed-chunk-9-1.png" style="display: block; margin: auto;" /><img src="DDSAnalytics_files/figure-html/unnamed-chunk-9-2.png" style="display: block; margin: auto;" />
+<img src="DDSAnalytics_files/figure-html/unnamed-chunk-9-1.png" style="display: block; margin: auto;" />
+<img src="DDSAnalytics_files/figure-html/unnamed-chunk-10-1.png" style="display: block; margin: auto auto auto 0;" />
   
 As requested we have captured the counts of management positions in the table below:
 
@@ -177,11 +178,11 @@ As requested we have captured the counts of management positions in the table be
 </table>
 ####Is there a relationship between Age and Income?  
 There's no apparent relationship between Age and Income. The plot below shows a very slight upward incline as age increases but is relatively insignificant.  
-<img src="DDSAnalytics_files/figure-html/unnamed-chunk-12-1.png" style="display: block; margin: auto;" />
+<img src="DDSAnalytics_files/figure-html/unnamed-chunk-13-1.png" style="display: block; margin: auto;" />
 
-####Is there a relationship between life satisfaction and any other attribute?  
 
-<img src="DDSAnalytics_files/figure-html/unnamed-chunk-13-1.png" style="display: block; margin: auto;" /><img src="DDSAnalytics_files/figure-html/unnamed-chunk-13-2.png" style="display: block; margin: auto;" />
+
+
 
 ####What are the top 3 factors that lead to attrition?
 
@@ -189,7 +190,8 @@ Using the Stepwise Variable selction method we have determined that the most eff
 
 These factors can be used to predict how long in years an employee will stay with the company using a statistical formula.
 
-We advise caution be used in decision making based on the following variables for ethical or even legal reasons:
+We advise caution be used in decision making based on the following variables for ethical or even legal reasons:  
+
 * Gender  
 * Marital Status  
 * Relationship Satisfaction  
@@ -336,4 +338,4 @@ Though this analysis is significant it is merely a proof of concept; higher qual
 ##              -3.578e-02               -3.204e-04
 ```
 
-![](DDSAnalytics_files/figure-html/unnamed-chunk-17-1.png)<!-- -->![](DDSAnalytics_files/figure-html/unnamed-chunk-17-2.png)<!-- -->![](DDSAnalytics_files/figure-html/unnamed-chunk-17-3.png)<!-- -->![](DDSAnalytics_files/figure-html/unnamed-chunk-17-4.png)<!-- -->
+![](DDSAnalytics_files/figure-html/unnamed-chunk-18-1.png)<!-- -->![](DDSAnalytics_files/figure-html/unnamed-chunk-18-2.png)<!-- -->![](DDSAnalytics_files/figure-html/unnamed-chunk-18-3.png)<!-- -->![](DDSAnalytics_files/figure-html/unnamed-chunk-18-4.png)<!-- -->
