@@ -43,10 +43,10 @@ sessionInfo()
 palette <- c('#073857','#4E91DD','#A13764','#7D9099','#32C3A4','#2F63A0','#484848','#2C707E','#D1A34F','#E34A46','#FCFCFC')
 ```
 ## Business Objective
-The leadership has identified predicting employee turnover as its first application of data science for talent management. Before investing in the project they would like an analysis of existing employee data.  
+Conduct an analysis of existing employee data to determine factors that lead to attrition. Highlight specific trends that contribute to turnover.
 
 ## Data
-Data was provided by the client in form of a .csv file "CaseStudy2-data.xlsx".
+Data was provided by the client in form of a .csv file "CaseStudy2-data.xlsx". The data defines employee information by Education, Environment Satisfaction, Job Involvement, Job Satisfaction, Performance Rating, Relationship Satisfaction, and Work Life Balance.
 
 ####Basic Statistics
 The data includes a total of 1470 current and terminated employee records with 35 variables. 
@@ -279,9 +279,13 @@ The top 3 factors that predict how long an employee will stay with the company i
 
 Though this analysis is significant it is merely a proof of concept; higher quality results can be achieved wiht additional time and resources for analyzing the data.
 
+<<<<<<< HEAD
 ####Appendix
 ```{r}
 ols_step_both_p(model)
 EmployeeRetention.lm
 plot(EmployeeRetention.lm)
 ```
+=======
+The business is also interested in learning about any job role specific trends that may exist in the data set (e.g., “Data Scientists have the highest job satisfaction”
+>>>>>>> e3a6f392ef38102818de8e9aa562a311b0f1ce31
